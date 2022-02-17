@@ -1,14 +1,42 @@
 import 'package:flutter/material.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:just_audio_background/just_audio_background.dart';
 import 'utils/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'utils/audio.dart';
+import 'components/drawer_left.dart';
 
-void main() {
+Future<void> main() async {
+  await JustAudioBackground.init(
+    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
+    androidNotificationChannelName: 'Audio playback',
+    androidNotificationOngoing: true,
+  );
   runApp(const MyApp());
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   const MyApp({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isPlaying = false;
+
+  Audio audio = Audio();
+
+  @override
+  void initState() {
+    audio.start();
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    audio.destroy();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -20,152 +48,54 @@ class MyApp extends StatelessWidget {
           Theme.of(context).textTheme,
         ),
       ),
-      home: Scaffold(
-        appBar: AppBar(
-          title: const Text('MyKampus Radio'),
-        ),
-        floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(bottom: 20),
-          child: FloatingActionButton(
-            onPressed: null,
-            backgroundColor: kMKRColorMain,
-            child: const Icon(Icons.play_arrow_rounded),
+      home: SafeArea(
+        child: Scaffold(
+          appBar: AppBar(
+            title: const Text('MyKampus Radio'),
           ),
-        ),
-        body: const Center(
-          child: Padding(
-            padding: EdgeInsets.all(50),
-            child: Image(
-              image: AssetImage('images/MKR-logo-small-blue.png'),
+          floatingActionButtonLocation:
+              FloatingActionButtonLocation.centerFloat,
+          floatingActionButton: Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: FloatingActionButton(
+              onPressed: () {
+                setState(() {
+                  if (isPlaying == true) {
+                    // player.pause();
+                    audio.pause();
+                    isPlaying = false;
+                    debugPrint('Audio is pause');
+                  } else {
+                    // player.play();
+                    audio.play();
+                    isPlaying = true;
+                    debugPrint('Audio is playing');
+                  }
+                });
+              },
+              backgroundColor: kMKRColorMain,
+              child: isPlaying
+                  ? const Icon(Icons.pause_rounded)
+                  : const Icon(Icons.play_arrow_rounded),
             ),
           ),
-        ),
-        drawer: Drawer(
-          shape: const RoundedRectangleBorder(
-            borderRadius: BorderRadius.only(
-              bottomRight: Radius.circular(10),
-              topRight: Radius.circular(10),
-            ),
-          ),
-          child: ListView(
+          body: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const DrawerHeader(
+              const Padding(
+                padding: EdgeInsets.all(80),
                 child: Image(
-                  image: AssetImage('images/MKR-logo-long-blue.png'),
+                  image: AssetImage('images/MKR-logo-small-blue.png'),
                 ),
               ),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.headphones,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Listen Now!'),
-              ),
-              const Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-                child: Text('Content Hangat!'),
-              ),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.globeAsia,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Laman Web'),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.mic,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Show Clip'),
-              ),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.youtube,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('MyKampus TV'),
-              ),
-              const Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-                child: Text('Social Media'),
-              ),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.facebook,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Facebook'),
-              ),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.twitter,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Twitter'),
-              ),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.instagramSquare,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Instagram'),
-              ),
-              const Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-                child: Text('Hubungi Kami'),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.call,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Telephone'),
-              ),
-              ListTile(
-                leading: FaIcon(
-                  FontAwesomeIcons.whatsappSquare,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('WhatsApp'),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.place,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Lokasi'),
-              ),
-              const Divider(
-                height: 20,
-                thickness: 1,
-              ),
-              const Padding(
-                padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
-                child: Text('Extra'),
-              ),
-              ListTile(
-                leading: Icon(
-                  Icons.settings,
-                  color: kMKRColorMain,
-                ),
-                title: const Text('Settings'),
+              Text(
+                'status',
+                style: TextStyle(color: Colors.grey[400]),
               ),
             ],
           ),
+          drawer: const DrawerLeft(),
         ),
       ),
     );
