@@ -44,16 +44,12 @@
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
 	
-	<!-- Custom add on -->
-	<key>NSAppTransportSecurity</key>
-	<dict>
-	<key>NSAllowsArbitraryLoads</key>
-    	<true/>
-	<!-- AudioService add on -->
+	<!-- just_audio for iOS -->
+	<key>NSMicrophoneUsageDescription</key>
+	<string>... iOS by default bundled audio service together with Microphone, the app won't use Microphone ...</string>
 	<key>UIBackgroundModes</key>
-	<array>
-		<string>audio</string>
-	</array>
-	</dict>
+  	<array>
+    	<string>audio</string>
+  	</array>
 </dict>
 </plist>
