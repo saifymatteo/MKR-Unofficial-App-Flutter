@@ -4,12 +4,18 @@ import 'utils/constant.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'utils/audio.dart';
 import 'components/drawer_left.dart';
+import 'dart:async';
 
 Future<void> main() async {
   await JustAudioBackground.init(
-    androidNotificationChannelId: 'com.ryanheise.bg_demo.channel.audio',
-    androidNotificationChannelName: 'Audio playback',
+    androidNotificationChannelId: 'com.saifymatteo.mkr_flutter.channel.audio',
+    androidNotificationChannelName: 'Radio Playback',
     androidNotificationOngoing: true,
+    androidStopForegroundOnPause: true,
+    androidNotificationChannelDescription: 'Lagu indie lokal hangat',
+    androidNotificationClickStartsActivity: true,
+    androidResumeOnClick: true,
+    // androidNotificationIcon: , //TODO: to add custom icon (monochrome) to notification bar
   );
   runApp(const MyApp());
 }
@@ -22,29 +28,44 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyAppState extends State<MyApp> {
-  bool isPlaying = false;
-
+  String statusAudio = '';
+  String statusPlaying = '';
   Audio audio = Audio();
+  Timer? timer; // Initialize timer to display audio player loading status
 
   @override
   void initState() {
-    audio.start();
+    audio.setStreamURL();
+    audio.getURLMetadata();
+    statusAudio = audio.getPlayingState();
+    // periodically set State every 0.5 seconds
+    timer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
+      setState(() {
+        statusAudio = audio.getPlayingState();
+      });
+    });
     super.initState();
   }
 
   @override
   void dispose() {
     audio.destroy();
+    timer?.cancel();
     super.dispose();
   }
 
   @override
   Widget build(BuildContext context) {
+    bool isPlaying = audio.playingStatus;
+    String fileName = audio.fileName;
+    String artistSong = audio.artistSong;
+    String titleSong = audio.titleSong;
+
     return MaterialApp(
       title: 'Flutter Demo',
       theme: ThemeData(
         primaryColor: kMKRColorMain,
-        textTheme: GoogleFonts.montserratTextTheme(
+        textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
@@ -57,24 +78,24 @@ class _MyAppState extends State<MyApp> {
               FloatingActionButtonLocation.centerFloat,
           floatingActionButton: Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: FloatingActionButton(
+            child: FloatingActionButton.extended(
               onPressed: () {
+                if (isPlaying) {
+                  audio.pause();
+                  statusPlaying = 'Pause';
+                  debugPrint('Audio is pause');
+                } else {
+                  audio.play();
+                  statusPlaying = 'Playing';
+                  debugPrint('Audio is playing');
+                }
                 setState(() {
-                  if (isPlaying == true) {
-                    // player.pause();
-                    audio.pause();
-                    isPlaying = false;
-                    debugPrint('Audio is pause');
-                  } else {
-                    // player.play();
-                    audio.play();
-                    isPlaying = true;
-                    debugPrint('Audio is playing');
-                  }
+                  isPlaying = !audio.playingStatus;
                 });
               },
               backgroundColor: kMKRColorMain,
-              child: isPlaying
+              label: Text(statusPlaying),
+              icon: isPlaying
                   ? const Icon(Icons.pause_rounded)
                   : const Icon(Icons.play_arrow_rounded),
             ),
@@ -89,9 +110,25 @@ class _MyAppState extends State<MyApp> {
                   image: AssetImage('images/MKR-logo-small-blue.png'),
                 ),
               ),
-              Text(
-                'status',
-                style: TextStyle(color: Colors.grey[400]),
+              Column(
+                children: [
+                  Text(
+                    statusAudio,
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                  Text(
+                    'Filename: $fileName',
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                  Text(
+                    'Artist: $artistSong',
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                  Text(
+                    'Title: $titleSong',
+                    style: TextStyle(color: Colors.grey[400]),
+                  ),
+                ],
               ),
             ],
           ),

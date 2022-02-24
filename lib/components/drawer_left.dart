@@ -88,6 +88,13 @@ class DrawerLeft extends StatelessWidget {
             ),
             title: const Text('Instagram'),
           ),
+          ListTile(
+            leading: FaIcon(
+              FontAwesomeIcons.tiktok,
+              color: kMKRColorMain,
+            ),
+            title: const Text('TikTok'),
+          ),
           const Divider(
             height: 20,
             thickness: 1,

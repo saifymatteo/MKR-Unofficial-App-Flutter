@@ -4,4 +4,4 @@ import 'package:flutter/material.dart';
 
 MaterialColor kMKRColorMain = createMaterialColor(const Color(0xFF6097D0));
 
-TextStyle kDrawerText = GoogleFonts.montserrat();
+TextStyle kDrawerText = GoogleFonts.poppins();
