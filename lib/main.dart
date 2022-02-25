@@ -31,7 +31,13 @@ class _MyAppState extends State<MyApp> {
   String statusAudio = '';
   String statusPlaying = '';
   Audio audio = Audio();
-  Timer? timer; // Initialize timer to display audio player loading status
+  Timer?
+      timerStatusAudio; // Initialize timer to display audio player loading status
+  Timer? timerFileName;
+
+  void callURLMetada() {
+    audio.getURLMetadata();
+  }
 
   @override
   void initState() {
@@ -39,18 +45,18 @@ class _MyAppState extends State<MyApp> {
     audio.getURLMetadata();
     statusAudio = audio.getPlayingState();
     // periodically set State every 0.5 seconds
-    timer = Timer.periodic(const Duration(milliseconds: 500), (timer) {
-      setState(() {
-        statusAudio = audio.getPlayingState();
-      });
-    });
+    timerStatusAudio = Timer.periodic(const Duration(milliseconds: 500),
+        (timer) => setState(() => statusAudio = audio.getPlayingState()));
+    timerFileName = Timer.periodic(const Duration(seconds: 30),
+        (timer) => setState(() => callURLMetada()));
     super.initState();
   }
 
   @override
   void dispose() {
     audio.destroy();
-    timer?.cancel();
+    timerStatusAudio?.cancel();
+    timerFileName?.cancel();
     super.dispose();
   }
 

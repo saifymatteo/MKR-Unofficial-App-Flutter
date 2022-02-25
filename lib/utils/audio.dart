@@ -16,19 +16,23 @@ class Audio {
 
   // Set the stream URL
   void setStreamURL() async {
-    audioPlayer.setAudioSource(
-      AudioSource.uri(
-        Uri.parse(radioURL),
-        tag: MediaItem(
-          id: radioURL,
-          album: 'MKR Radio Album',
-          title: 'Various Songs',
-          artist: 'Various Artist',
-          artUri: Uri.parse(
-              'https://mykampusradio.com/wp-content/uploads/2022/02/MKR-logo-small-blue-e1645612000865.png'),
+    try {
+      audioPlayer.setAudioSource(
+        AudioSource.uri(
+          Uri.parse(radioURL),
+          tag: MediaItem(
+            id: radioURL,
+            album: 'MKR Radio Album',
+            title: 'Various Songs',
+            artist: 'Various Artist',
+            artUri: Uri.parse(
+                'https://mykampusradio.com/wp-content/uploads/2022/02/MKR-logo-small-blue-e1645612000865.png'),
+          ),
         ),
-      ),
-    );
+      );
+    } catch (e) {
+      debugPrint('$e');
+    }
     debugPrint('Playing from: $radioURL');
   }
 
@@ -80,8 +84,7 @@ class Audio {
       fileName = jsonDecode(response.body)["streams"][0]["songtitle"];
       artistSong = getArtistName(fileName);
       titleSong = getTitleName(fileName);
-      debugPrint(fileName);
-      debugPrint(artistSong);
+      debugPrint('Now Playing: $fileName');
     } else {
       debugPrint('${response.statusCode}');
       debugPrint('${response.reasonPhrase}');
@@ -104,7 +107,7 @@ class Audio {
 
     if (name.contains(placeholder)) {
       int indexOfPlaceholder = name.indexOf(placeholder);
-      return name.substring((indexOfPlaceholder + 3), (name.length - 1));
+      return name.substring((indexOfPlaceholder + 3), (name.length));
     } else {
       return 'Various Song';
     }
