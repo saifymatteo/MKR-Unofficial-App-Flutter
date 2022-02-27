@@ -1,14 +1,12 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
-
 import 'package:mkr_flutter/components/drawer.dart';
 import 'package:mkr_flutter/utils/constant.dart';
 import 'package:mkr_flutter/utils/screen_name.dart';
 
 import 'package:mkr_flutter/screens/laman_web_screen.dart';
 import 'package:mkr_flutter/screens/listen_now_screen.dart';
-import 'package:mkr_flutter/screens/lokasi_screen.dart';
 import 'package:mkr_flutter/screens/mykampus_tv_screen.dart';
 import 'package:mkr_flutter/screens/settings_screen.dart';
 import 'package:mkr_flutter/screens/show_clip_screen.dart';
@@ -16,8 +14,6 @@ import 'package:mkr_flutter/screens/socmed_facebook_screen.dart';
 import 'package:mkr_flutter/screens/socmed_instagram_screen.dart';
 import 'package:mkr_flutter/screens/socmed_tiktok_screen.dart';
 import 'package:mkr_flutter/screens/socmed_twitter_screen.dart';
-import 'package:mkr_flutter/screens/telephone_screen.dart';
-import 'package:mkr_flutter/screens/whatsapp_screen.dart';
 import 'package:mkr_flutter/screens/error_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -106,15 +102,6 @@ class _MainScreenState extends State<MainScreen> {
             case Screen.socmedTikTokScreen:
               builder = (BuildContext context) => socmedTikTokScreen();
               break;
-            case Screen.telephoneScreen:
-              builder = (BuildContext context) => telephoneScreen();
-              break;
-            case Screen.whatsappScreen:
-              builder = (BuildContext context) => whatsappScreen();
-              break;
-            case Screen.lokasiScreen:
-              builder = (BuildContext context) => lokasiScreen();
-              break;
             case Screen.settingsScreen:
               builder = (BuildContext context) => settingsScreen();
               break;
@@ -151,13 +138,6 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget socmedTikTokScreen() =>
       SocmedTikTokScreen(navigatorKey: widget.navigatorKey);
-
-  Widget telephoneScreen() =>
-      TelephoneScreen(navigatorKey: widget.navigatorKey);
-
-  Widget whatsappScreen() => WhatsappScreen(navigatorKey: widget.navigatorKey);
-
-  Widget lokasiScreen() => LokasiScreen(navigatorKey: widget.navigatorKey);
 
   Widget settingsScreen() => SettingScreen(navigatorKey: widget.navigatorKey);
 }
