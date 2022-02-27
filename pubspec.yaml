@@ -34,7 +34,7 @@ dependencies:
   google_fonts: ^2.3.1 # ! Need to use actual font for release
   just_audio: ^0.9.20
   just_audio_libwinmedia: ^0.0.4
-  just_audio_background: ^0.0.1-beta.4
+  audio_service: ^0.18.3
   http: ^0.13.4
 
 dev_dependencies:
