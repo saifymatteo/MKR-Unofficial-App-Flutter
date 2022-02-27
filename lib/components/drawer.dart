@@ -1,11 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mkr_flutter/utils/constant.dart';
+import 'package:mkr_flutter/utils/screen_name.dart';
 
 class DrawerNav extends StatelessWidget {
   const DrawerNav({
     Key? key,
+    required this.navigatorKey,
   }) : super(key: key);
+
+  final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +33,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Listen Now!'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.home);
+            },
           ),
           const Divider(
             height: 20,
@@ -45,7 +52,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Laman Web'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.lamanWebScreen);
+            },
           ),
           ListTile(
             leading: Icon(
@@ -53,7 +63,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Show Clip'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.showClipScreen);
+            },
           ),
           ListTile(
             leading: FaIcon(
@@ -61,7 +74,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('MyKampus TV'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.myKampusTvScreen);
+            },
           ),
           const Divider(
             height: 20,
@@ -77,7 +93,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Facebook'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.socmedFacebookScreen);
+            },
           ),
           ListTile(
             leading: FaIcon(
@@ -85,7 +104,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Twitter'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.socmedTwitterScreen);
+            },
           ),
           ListTile(
             leading: FaIcon(
@@ -93,7 +115,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Instagram'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.socmedInstagramScreen);
+            },
           ),
           ListTile(
             leading: FaIcon(
@@ -101,7 +126,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('TikTok'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.socmedTikTokScreen);
+            },
           ),
           const Divider(
             height: 20,
@@ -117,7 +145,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Telephone'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.telephoneScreen);
+            },
           ),
           ListTile(
             leading: FaIcon(
@@ -125,7 +156,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('WhatsApp'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.whatsappScreen);
+            },
           ),
           ListTile(
             leading: Icon(
@@ -133,7 +167,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Lokasi'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.lokasiScreen);
+            },
           ),
           const Divider(
             height: 20,
@@ -149,7 +186,10 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Settings'),
-            onTap: () => Navigator.pop(context),
+            onTap: () {
+              Navigator.pop(context);
+              navigatorKey.currentState!.pushNamed(Screen.settingsScreen);
+            },
           ),
         ],
       ),
