@@ -1,15 +1,24 @@
 import 'package:flutter/material.dart';
+import 'dart:async';
+import 'package:webview_flutter/webview_flutter.dart';
 
 class SocmedInstagramScreen extends StatelessWidget {
-  const SocmedInstagramScreen({
+  SocmedInstagramScreen({
     Key? key,
     required this.navigatorKey,
   }) : super(key: key);
 
   final GlobalKey<NavigatorState> navigatorKey;
+  final Completer<WebViewController> controller = Completer<WebViewController>();
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Instagram Page'));
+    return WebView(
+      initialUrl: 'https://www.instagram.com/mykampus_radio',
+      javascriptMode: JavascriptMode.unrestricted,
+      onWebViewCreated: (WebViewController webViewController) {
+        controller.complete(webViewController);
+      },
+    );
   }
 }
