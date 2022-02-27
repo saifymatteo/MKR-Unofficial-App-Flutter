@@ -36,6 +36,7 @@ dependencies:
   just_audio_libwinmedia: ^0.0.4
   audio_service: ^0.18.3
   http: ^0.13.4
+  loading_animation_widget: ^1.1.0+1
 
 dev_dependencies:
   flutter_lints: ^1.0.0
