@@ -79,8 +79,6 @@ class AudioPlayerHandler extends BaseAudioHandler {
         artUri: Uri.parse(
             'https://mykampusradio.com/wp-content/uploads/2022/02/MKR-logo-small-blue-e1645612000865.png'),
       );
-      debugPrint('mediaItem Title: $titleSong');
-      debugPrint('mediaItem Artist: $artistSong');
       return mediaItem;
     } catch (e) {
       debugPrint('Error: $e');
