@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mkr_flutter/utils/constant.dart';
 
-class DrawerLeft extends StatelessWidget {
-  const DrawerLeft({
+class DrawerNav extends StatelessWidget {
+  const DrawerNav({
     Key? key,
   }) : super(key: key);
 
@@ -29,6 +29,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Listen Now!'),
+            onTap: () => Navigator.pop(context),
           ),
           const Divider(
             height: 20,
@@ -44,6 +45,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Laman Web'),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             leading: Icon(
@@ -51,6 +53,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Show Clip'),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             leading: FaIcon(
@@ -58,6 +61,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('MyKampus TV'),
+            onTap: () => Navigator.pop(context),
           ),
           const Divider(
             height: 20,
@@ -73,6 +77,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Facebook'),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             leading: FaIcon(
@@ -80,6 +85,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Twitter'),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             leading: FaIcon(
@@ -87,6 +93,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Instagram'),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             leading: FaIcon(
@@ -94,6 +101,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('TikTok'),
+            onTap: () => Navigator.pop(context),
           ),
           const Divider(
             height: 20,
@@ -109,6 +117,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Telephone'),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             leading: FaIcon(
@@ -116,6 +125,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('WhatsApp'),
+            onTap: () => Navigator.pop(context),
           ),
           ListTile(
             leading: Icon(
@@ -123,6 +133,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Lokasi'),
+            onTap: () => Navigator.pop(context),
           ),
           const Divider(
             height: 20,
@@ -138,6 +149,7 @@ class DrawerLeft extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Settings'),
+            onTap: () => Navigator.pop(context),
           ),
         ],
       ),
