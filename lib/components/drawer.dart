@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mkr_flutter/utils/constant.dart';
 import 'package:mkr_flutter/utils/screen_name.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class DrawerNav extends StatelessWidget {
   const DrawerNav({
@@ -117,7 +118,8 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Instagram'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.socmedInstagramScreen);
+              navigatorKey.currentState!
+                  .pushNamed(Screen.socmedInstagramScreen);
             },
           ),
           ListTile(
@@ -147,7 +149,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Telephone'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.telephoneScreen);
+              launch('tel:+60395202595');
             },
           ),
           ListTile(
@@ -158,7 +160,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('WhatsApp'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.whatsappScreen);
+              launch('https://wa.me/60122970491');
             },
           ),
           ListTile(
@@ -169,7 +171,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Lokasi'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.lokasiScreen);
+              launch('https://goo.gl/maps/cjK65Rr6t2nw7aJE7');
             },
           ),
           const Divider(
