@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
-class LamanWebScreen extends StatelessWidget {
-  const LamanWebScreen({
+class LokasiScreen extends StatelessWidget {
+  const LokasiScreen({
     Key? key,
     required this.navigatorKey,
   }) : super(key: key);
@@ -10,6 +10,6 @@ class LamanWebScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Center(child: Text('Laman Web Page'));
+    return const Center(child: Text('Lokasi Page'));
   }
 }
