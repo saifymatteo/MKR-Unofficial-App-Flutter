@@ -3,8 +3,13 @@ import 'package:flutter/material.dart';
 
 class ListenNowScreen extends StatelessWidget {
   final AudioHandler audioHandler;
+  final GlobalKey<NavigatorState> navigatorKey;
 
-  const ListenNowScreen(this.audioHandler);
+  const ListenNowScreen({
+    Key? key,
+    required this.audioHandler,
+    required this.navigatorKey,
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
