@@ -5,15 +5,8 @@ import 'package:mkr_flutter/components/drawer.dart';
 import 'package:mkr_flutter/utils/constant.dart';
 import 'package:mkr_flutter/utils/screen_name.dart';
 
-import 'package:mkr_flutter/screens/laman_web_screen.dart';
 import 'package:mkr_flutter/screens/listen_now_screen.dart';
-import 'package:mkr_flutter/screens/mykampus_tv_screen.dart';
 import 'package:mkr_flutter/screens/settings_screen.dart';
-import 'package:mkr_flutter/screens/show_clip_screen.dart';
-import 'package:mkr_flutter/screens/socmed_facebook_screen.dart';
-import 'package:mkr_flutter/screens/socmed_instagram_screen.dart';
-import 'package:mkr_flutter/screens/socmed_tiktok_screen.dart';
-import 'package:mkr_flutter/screens/socmed_twitter_screen.dart';
 import 'package:mkr_flutter/screens/error_screen.dart';
 
 class MainScreen extends StatefulWidget {
@@ -81,27 +74,6 @@ class _MainScreenState extends State<MainScreen> {
             case Screen.home:
               builder = (BuildContext context) => listenNowScreen();
               break;
-            case Screen.lamanWebScreen:
-              builder = (BuildContext context) => lamanWebScreen();
-              break;
-            case Screen.showClipScreen:
-              builder = (BuildContext context) => showClipScreen();
-              break;
-            case Screen.myKampusTvScreen:
-              builder = (BuildContext context) => myKampusTvScreen();
-              break;
-            case Screen.socmedFacebookScreen:
-              builder = (BuildContext context) => socmedFacebookScreen();
-              break;
-            case Screen.socmedTwitterScreen:
-              builder = (BuildContext context) => socmedTwitterScreen();
-              break;
-            case Screen.socmedInstagramScreen:
-              builder = (BuildContext context) => socmedInstagramScreen();
-              break;
-            case Screen.socmedTikTokScreen:
-              builder = (BuildContext context) => socmedTikTokScreen();
-              break;
             case Screen.settingsScreen:
               builder = (BuildContext context) => settingsScreen();
               break;
@@ -119,25 +91,6 @@ class _MainScreenState extends State<MainScreen> {
 
   Widget listenNowScreen() => ListenNowScreen(
       audioHandler: widget.audioHandler, navigatorKey: widget.navigatorKey);
-
-  Widget lamanWebScreen() => LamanWebScreen(navigatorKey: widget.navigatorKey);
-
-  Widget showClipScreen() => ShowClipScreen(navigatorKey: widget.navigatorKey);
-
-  Widget myKampusTvScreen() =>
-      MyKampusTvScreen(navigatorKey: widget.navigatorKey);
-
-  Widget socmedFacebookScreen() =>
-      SocmedFacebookScreen(navigatorKey: widget.navigatorKey);
-
-  Widget socmedTwitterScreen() =>
-      SocmedTwitterScreen(navigatorKey: widget.navigatorKey);
-
-  Widget socmedInstagramScreen() =>
-      SocmedInstagramScreen(navigatorKey: widget.navigatorKey);
-
-  Widget socmedTikTokScreen() =>
-      SocmedTikTokScreen(navigatorKey: widget.navigatorKey);
 
   Widget settingsScreen() => SettingScreen(navigatorKey: widget.navigatorKey);
 }

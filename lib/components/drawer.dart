@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mkr_flutter/utils/constant.dart';
@@ -55,7 +57,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Laman Web'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.lamanWebScreen);
+              launch('https://mykampusradio.com/');
             },
           ),
           ListTile(
@@ -66,7 +68,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Show Clip'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.showClipScreen);
+              launch('https://www.youtube.com/channel/UChVS7qvjXYiPuqYNtiAPOWw');
             },
           ),
           ListTile(
@@ -77,7 +79,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('MyKampus TV'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.myKampusTvScreen);
+              launch('https://www.youtube.com/channel/UC0wQr4JFllCGu5lehj4gHGw');
             },
           ),
           const Divider(
@@ -96,7 +98,13 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Facebook'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.socmedFacebookScreen);
+              if (Platform.isAndroid) {
+                launch('fb://page/973465132726247');
+              } else if (Platform.isIOS) {
+                launch('fb://profile/973465132726247');
+              } else {
+                launch('https://www.facebook.com/mykampusradio/');
+              }
             },
           ),
           ListTile(
@@ -107,7 +115,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Twitter'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.socmedTwitterScreen);
+              launch('https://twitter.com/mykampusradio');
             },
           ),
           ListTile(
@@ -118,8 +126,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Instagram'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!
-                  .pushNamed(Screen.socmedInstagramScreen);
+              launch('https://www.instagram.com/mykampus_radio');
             },
           ),
           ListTile(
@@ -130,7 +137,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('TikTok'),
             onTap: () {
               Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.socmedTikTokScreen);
+              launch('https://www.tiktok.com/@mykampus_radio');
             },
           ),
           const Divider(
@@ -140,6 +147,17 @@ class DrawerNav extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
             child: Text('Hubungi Kami'),
+          ),
+          ListTile(
+            leading: Icon(
+              Icons.email_rounded,
+              color: kMKRColorMain,
+            ),
+            title: const Text('Email'),
+            onTap: () {
+              Navigator.pop(context);
+              launch('mailto:mykampusradio@gmail.com?subject=Pertanyaan&body=##%20Dihantar%20dari%20aplikasi%20MKR%20##');
+            },
           ),
           ListTile(
             leading: Icon(
