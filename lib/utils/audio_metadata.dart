@@ -9,16 +9,20 @@ class AudioMetadata {
   String artistSong = '';
 
   Future<void> getURLMetadata() async {
-    Response response = await get(Uri.parse(metaURL));
+    try {
+      Response response = await get(Uri.parse(metaURL));
 
-    if (response.statusCode == 200) {
-      fileName = jsonDecode(response.body)["streams"][0]["songtitle"];
-      artistSong = getArtistName(fileName);
-      titleSong = getTitleName(fileName);
-      debugPrint('Now Playing: $fileName');
-    } else {
-      debugPrint('${response.statusCode}');
-      debugPrint('${response.reasonPhrase}');
+      if (response.statusCode == 200) {
+        fileName = jsonDecode(response.body)["streams"][0]["songtitle"];
+        artistSong = getArtistName(fileName);
+        titleSong = getTitleName(fileName);
+        debugPrint('Now Playing: $fileName');
+      } else {
+        debugPrint('${response.statusCode}');
+        debugPrint('${response.reasonPhrase}');
+      }
+    } catch (e) {
+      debugPrint('Error: $e');
     }
   }
 
