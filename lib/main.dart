@@ -19,7 +19,6 @@ Future<void> main() async {
       androidNotificationChannelDescription: 'Lagu indie lokal hangat',
       androidNotificationClickStartsActivity: true,
       androidResumeOnClick: true,
-      // androidNotificationIcon: , //TODO: to add custom icon (monochrome) to notification bar
     ),
   );
   runApp(MyApp());
