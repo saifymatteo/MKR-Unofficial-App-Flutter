@@ -1,5 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:flutter/material.dart';
+import 'package:loading_animation_widget/loading_animation_widget.dart';
+import 'package:mkr_flutter/utils/constant.dart';
 
 class ListenNowScreen extends StatelessWidget {
   final AudioHandler audioHandler;
@@ -22,6 +24,46 @@ class ListenNowScreen extends StatelessWidget {
           child: Image(
             image: AssetImage('images/MKR-logo-small-blue.png'),
           ),
+        ),
+        StreamBuilder<MediaItem?>(
+          stream: audioHandler.mediaItem,
+          builder: (context, snapshot) {
+            final artistSong = snapshot.data?.artist ?? 'Various Artist';
+            final titleSong = snapshot.data?.title ?? 'Various Song';
+            return Padding(
+              padding: const EdgeInsets.only(left: 30, right: 30),
+              child: (artistSong == '')
+                  ? LoadingAnimationWidget.waveDots(
+                      color: kMKRColorMain, size: 40)
+                  : Column(
+                      children: [
+                        Text(
+                          titleSong,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold,
+                            color: kMKRColorMain,
+                          ),
+                        ),
+                        const SizedBox(
+                          height: 5,
+                        ),
+                        Text(
+                          artistSong,
+                          textAlign: TextAlign.center,
+                          style: TextStyle(
+                            fontSize: 15,
+                            color: kMKRColorMainDark,
+                          ),
+                        ),
+                      ],
+                    ),
+            );
+          },
+        ),
+        const SizedBox(
+          height: 5,
         ),
         StreamBuilder<PlaybackState>(
           stream: audioHandler.playbackState,
@@ -47,36 +89,14 @@ class ListenNowScreen extends StatelessWidget {
             }
             return Text(
               statusAudio,
-              style: TextStyle(color: Colors.grey[400]),
+              textAlign: TextAlign.center,
+              style: TextStyle(
+                fontSize: 10,
+                color: Colors.grey[400],
+              ),
             );
           },
         ),
-        StreamBuilder<MediaItem?>(
-          stream: audioHandler.mediaItem,
-          builder: (context, snapshot) {
-            final artist = snapshot.data?.artist ?? 'Various Artist';
-            final title = snapshot.data?.title ?? 'Various Song';
-            return Column(
-              children: [
-                Text(
-                  'Filename: $artist - $title',
-                  // 'Filename',
-                  style: TextStyle(color: Colors.grey[400]),
-                ),
-                Text(
-                  'Artist: $artist',
-                  // 'Artist',
-                  style: TextStyle(color: Colors.grey[400]),
-                ),
-                Text(
-                  'Song: $title',
-                  // 'Title',
-                  style: TextStyle(color: Colors.grey[400]),
-                ),
-              ],
-            );
-          },
-        )
       ],
     );
   }
