@@ -1,3 +1,4 @@
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
 import 'utils/constant.dart';
@@ -21,38 +22,59 @@ Future<void> main() async {
       androidResumeOnClick: true,
     ),
   );
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  final savedThemeMode = await AdaptiveTheme.getThemeMode();
+  runApp(MyApp(savedThemeMode: savedThemeMode,));
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  MyApp({this.savedThemeMode, Key? key}) : super(key: key);
   final mainNavigatorKey = GlobalKey<NavigatorState>();
+  final AdaptiveThemeMode? savedThemeMode;
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
+    return AdaptiveTheme(
+      light: ThemeData(
+        brightness: Brightness.light,
         primaryColor: kMKRColorMain,
         textTheme: GoogleFonts.poppinsTextTheme(
           Theme.of(context).textTheme,
         ),
       ),
-      navigatorKey: mainNavigatorKey,
-      routes: {
-        Screen.home: (context) => MainScreen(
-              audioHandler: audioHandler,
-              title: 'MyKampus Radio',
-              route: Screen.home,
-              navigatorKey: mainNavigatorKey,
-            ),
-        Screen.settingsScreen: (context) => MainScreen(
-              audioHandler: audioHandler,
-              title: 'Settings',
-              route: Screen.settingsScreen,
-              navigatorKey: mainNavigatorKey,
-            ),
-      },
+      dark: ThemeData(
+        brightness: Brightness.dark,
+        primaryColor: kMKRColorMain,
+        textTheme: GoogleFonts.poppinsTextTheme(
+          Theme.of(context).textTheme.apply(
+                bodyColor: Colors.white,
+              ),
+        ),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
+        ),
+      ),
+      initial: savedThemeMode ?? AdaptiveThemeMode.light,
+      builder: (lightTheme, darkTheme) => MaterialApp(
+        title: 'Flutter Demo',
+        theme: lightTheme,
+        darkTheme: darkTheme,
+        navigatorKey: mainNavigatorKey,
+        routes: {
+          Screen.home: (context) => MainScreen(
+                audioHandler: audioHandler,
+                title: 'MyKampus Radio',
+                route: Screen.home,
+                navigatorKey: mainNavigatorKey,
+              ),
+          Screen.settingsScreen: (context) => MainScreen(
+                audioHandler: audioHandler,
+                title: 'Settings',
+                route: Screen.settingsScreen,
+                navigatorKey: mainNavigatorKey,
+              ),
+        },
+      ),
     );
   }
 }
