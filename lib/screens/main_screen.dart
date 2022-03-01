@@ -36,34 +36,36 @@ class _MainScreenState extends State<MainScreen> {
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: StreamBuilder<PlaybackState>(
-          stream: widget.audioHandler.playbackState,
-          builder: (context, snapshot) {
-            final playing = snapshot.data?.playing ?? false;
-            String isPlaying = playing ? 'Playing' : 'Pause';
-            final processingState =
-                snapshot.data?.processingState ?? AudioProcessingState.idle;
-            return Padding(
-                padding: const EdgeInsets.only(bottom: 20),
-                child: (processingState == AudioProcessingState.loading)
-                    ? LoadingAnimationWidget.staggeredDotsWave(
-                        color: kMKRColorMain, size: 60)
-                    : FloatingActionButton.extended(
-                        onPressed: () {
-                          if (playing) {
-                            widget.audioHandler.pause();
-                            debugPrint('Audio is pause');
-                          } else {
-                            widget.audioHandler.play();
-                            debugPrint('Audio is playing');
-                          }
-                        },
-                        backgroundColor: kMKRColorMain,
-                        label: Text(isPlaying),
-                        icon: playing
-                            ? const Icon(Icons.pause_rounded)
-                            : const Icon(Icons.play_arrow_rounded),
-                      ));
-          }),
+        stream: widget.audioHandler.playbackState,
+        builder: (context, snapshot) {
+          final playing = snapshot.data?.playing ?? false;
+          String isPlaying = playing ? 'Playing' : 'Pause';
+          final processingState =
+              snapshot.data?.processingState ?? AudioProcessingState.idle;
+          return Padding(
+            padding: const EdgeInsets.only(bottom: 20),
+            child: (processingState == AudioProcessingState.loading)
+                ? LoadingAnimationWidget.staggeredDotsWave(
+                    color: kMKRColorMain, size: 60)
+                : FloatingActionButton.extended(
+                    onPressed: () {
+                      if (playing) {
+                        widget.audioHandler.pause();
+                        debugPrint('Audio is pause');
+                      } else {
+                        widget.audioHandler.play();
+                        debugPrint('Audio is playing');
+                      }
+                    },
+                    backgroundColor: kMKRColorMain,
+                    label: Text(isPlaying),
+                    icon: playing
+                        ? const Icon(Icons.pause_rounded)
+                        : const Icon(Icons.play_arrow_rounded),
+                  ),
+          );
+        },
+      ),
       drawer: DrawerNav(
         navigatorKey: widget.navigatorKey,
       ),
