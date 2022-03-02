@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:mkr_flutter/utils/constant.dart';
-import 'package:mkr_flutter/utils/screen_name.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:mkr_flutter/main.dart';
 
 class DrawerNav extends StatelessWidget {
   const DrawerNav({
@@ -98,13 +96,7 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Facebook'),
             onTap: () {
               Navigator.pop(context);
-              if (Platform.isAndroid) {
-                launch('fb://page/973465132726247');
-              } else if (Platform.isIOS) {
-                launch('fb://profile/973465132726247');
-              } else {
-                launch('https://www.facebook.com/mykampusradio/');
-              }
+              launch('https://www.facebook.com/mykampusradio/');
             },
           ),
           ListTile(
