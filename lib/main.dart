@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
 import 'utils/constant.dart';
@@ -6,7 +7,9 @@ import 'package:google_fonts/google_fonts.dart';
 import 'utils/audio_handler.dart';
 import 'dart:async';
 import 'screens/main_screen.dart';
-import 'utils/screen_name.dart';
+import 'package:flutter/services.dart';
+import 'package:desktop_window/desktop_window.dart';
+import 'dart:io';
 
 late AudioHandler audioHandler;
 Future<void> main() async {
@@ -24,7 +27,26 @@ Future<void> main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
-  runApp(MyApp(savedThemeMode: savedThemeMode,));
+  // For Web
+  if (kIsWeb) {
+    runApp(MyApp(savedThemeMode: savedThemeMode));
+  }
+  // For Desktop Platform
+  else if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
+    await DesktopWindow.setMinWindowSize(const Size(540, 960));
+    await DesktopWindow.setMaxWindowSize(const Size(1080, 1920));
+    runApp(MyApp(savedThemeMode: savedThemeMode));
+  } 
+  // For Mobile Platform
+  else if (Platform.isAndroid || Platform.isIOS) {
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
+      (value) => runApp(MyApp(savedThemeMode: savedThemeMode)),
+    );
+  } 
+  // For Everything else
+  else {
+    runApp(MyApp(savedThemeMode: savedThemeMode));
+  }
 }
 
 class MyApp extends StatelessWidget {
@@ -56,7 +78,7 @@ class MyApp extends StatelessWidget {
       ),
       initial: savedThemeMode ?? AdaptiveThemeMode.light,
       builder: (lightTheme, darkTheme) => MaterialApp(
-        title: 'Flutter Demo',
+        title: 'MyKampus Radio Unofficial',
         theme: lightTheme,
         darkTheme: darkTheme,
         navigatorKey: mainNavigatorKey,
@@ -77,4 +99,19 @@ class MyApp extends StatelessWidget {
       ),
     );
   }
+}
+
+class Screen {
+  static const home = '/';
+  static const lamanWebScreen = '/lamanWebScreen';
+  static const showClipScreen = '/showClipScreen';
+  static const myKampusTvScreen = '/myKampusTVScreen';
+  static const socmedFacebookScreen = '/socmedFacebookScreen';
+  static const socmedTwitterScreen = '/socmedTwitterScreen';
+  static const socmedInstagramScreen = '/socmedInstagramScreen';
+  static const socmedTikTokScreen = '/socmedTikTokScreen';
+  static const telephoneScreen = '/telephoneScreen';
+  static const whatsappScreen = '/whatsappScreen';
+  static const lokasiScreen = '/lokasiScreen';
+  static const settingsScreen = '/settingsScreen';
 }
