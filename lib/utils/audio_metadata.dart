@@ -10,7 +10,15 @@ class AudioMetadata {
 
   Future<void> getURLMetadata() async {
     try {
-      Response response = await get(Uri.parse(metaURL));
+      Response response = await get(
+        Uri.parse(metaURL),
+        headers: {
+          "Access-Control-Allow-Origin": "*",
+          "Access-Control-Allow-Credentials": 'true',
+          "Access-Control-Allow-Headers": "Origin,Content-Type,X-Amz-Date,Authorization,X-Api-Key,X-Amz-Security-Token,locale",
+          "Access-Control-Allow-Methods": "GET, OPTIONS"
+        },
+      );
 
       if (response.statusCode == 200) {
         fileName = jsonDecode(response.body)["streams"][0]["songtitle"];
@@ -33,7 +41,7 @@ class AudioMetadata {
       int indexOfPlaceholder = name.indexOf(placeholder);
       return name.substring(0, indexOfPlaceholder);
     } else {
-      return 'Various Artist';
+      return 'MyKampus Radio';
     }
   }
 
@@ -44,7 +52,7 @@ class AudioMetadata {
       int indexOfPlaceholder = name.indexOf(placeholder);
       return name.substring((indexOfPlaceholder + 3), (name.length));
     } else {
-      return 'Various Song';
+      return name;
     }
   }
 }
