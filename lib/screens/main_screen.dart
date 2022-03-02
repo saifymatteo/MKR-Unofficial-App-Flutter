@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mkr_flutter/components/drawer.dart';
 import 'package:mkr_flutter/utils/constant.dart';
-import 'package:mkr_flutter/utils/screen_name.dart';
+import 'package:mkr_flutter/main.dart';
 
 import 'package:mkr_flutter/screens/listen_now_screen.dart';
 import 'package:mkr_flutter/screens/settings_screen.dart';
@@ -39,7 +39,7 @@ class _MainScreenState extends State<MainScreen> {
         stream: widget.audioHandler.playbackState,
         builder: (context, snapshot) {
           final playing = snapshot.data?.playing ?? false;
-          String isPlaying = playing ? 'Playing' : 'Pause';
+          String isPlaying = playing ? 'Pause' : 'Play';
           final processingState =
               snapshot.data?.processingState ?? AudioProcessingState.idle;
           return Padding(
