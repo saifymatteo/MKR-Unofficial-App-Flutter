@@ -36,13 +36,13 @@ Future<void> main() async {
     await DesktopWindow.setMinWindowSize(const Size(540, 960));
     await DesktopWindow.setMaxWindowSize(const Size(1080, 1920));
     runApp(MyApp(savedThemeMode: savedThemeMode));
-  } 
+  }
   // For Mobile Platform
   else if (Platform.isAndroid || Platform.isIOS) {
     SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
       (value) => runApp(MyApp(savedThemeMode: savedThemeMode)),
     );
-  } 
+  }
   // For Everything else
   else {
     runApp(MyApp(savedThemeMode: savedThemeMode));
