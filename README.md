@@ -9,7 +9,7 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 - Android
 - iOS
 - [Windows](https://github.com/saifymatteo/mkr_flutter/releases)
-- MacOS: unable to notarize the app for now
+- MacOS
 - [Web](https://mkrunofficial.netlify.app/)
 
 ## Dependecies
@@ -32,4 +32,5 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 ## Problem
 
-[Web](https://github.com/saifymatteo/mkr_flutter/blob/master/images/github/Mixed%20Content%20error.png): unable to get metadata due to ```Mixed Content``` issue (HTTP).
+- [Web](https://github.com/saifymatteo/mkr_flutter/blob/master/images/github/Mixed%20Content%20error.png): unable to get metadata due to ```Mixed Content``` issue (HTTP).
+- MacOS: unable to notarize the app for now
