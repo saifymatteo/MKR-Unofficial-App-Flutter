@@ -24,6 +24,11 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 - [adaptive_theme](https://pub.dev/packages/adaptive_theme): used for light and dark mode for the app.
 - [desktop_window](https://pub.dev/packages/desktop_window): used to set Windows minimum and maximum screen size.
 
+## TODO
+
+- Removed padding on main Logo image and replaced with bigger image.
+- Resize dekstop sizing to fit 1080p monitor
+
 ## Problem
 
 [Web](https://github.com/saifymatteo/mkr_flutter/blob/master/images/github/Mixed%20Content%20error.png): unable to get metadata due to ```Mixed Content``` issue (HTTP).
