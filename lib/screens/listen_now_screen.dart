@@ -21,7 +21,7 @@ class ListenNowScreen extends StatelessWidget {
       crossAxisAlignment: CrossAxisAlignment.center,
       children: [
         const Padding(
-          padding: EdgeInsets.all(80),
+          padding: EdgeInsets.only(left: 80, right: 80),
           child: Image(
             image: AssetImage('images/MKR-logo-small-blue.png'),
           ),

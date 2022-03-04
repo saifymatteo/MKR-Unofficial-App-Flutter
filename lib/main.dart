@@ -33,8 +33,8 @@ Future<void> main() async {
   }
   // For Desktop Platform
   else if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
-    await DesktopWindow.setMinWindowSize(const Size(540, 960));
-    await DesktopWindow.setMaxWindowSize(const Size(1080, 1920));
+    await DesktopWindow.setMinWindowSize(const Size(360, 640));
+    await DesktopWindow.setMaxWindowSize(const Size(720, 1280));
     runApp(MyApp(savedThemeMode: savedThemeMode));
   }
   // For Mobile Platform
