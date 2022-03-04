@@ -9,6 +9,7 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 - Android
 - iOS
 - [Windows](https://github.com/saifymatteo/mkr_flutter/releases)
+- MacOS: unable to notarize the app for now
 - [Web](https://mkrunofficial.netlify.app/)
 
 ## Dependecies
