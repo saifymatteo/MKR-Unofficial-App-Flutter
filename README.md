@@ -28,7 +28,8 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 ## TODO
 
 - Create server-side function to retrieve metadata (Firebase or something else)
-- Windows audio notification
+- Add audio notification (Windows)
+- Stop Audio Handler on [notification swipe](https://github.com/ryanheise/audio_service/wiki/FAQ?ref=morioh.com&utm_source=morioh.com#how-can-i-stop-the-audio-handler-when-the-user-swipes-away-the-app-in-the-task-manager) (Android)
 
 ## Problem
 
