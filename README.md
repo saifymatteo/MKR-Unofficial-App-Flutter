@@ -27,8 +27,8 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 ## TODO
 
-- Removed padding on main Logo image and replaced with bigger image.
-- Resize dekstop sizing to fit 1080p monitor
+- Create server-side function to retrieve metadata (Firebase or something else)
+- Windows audio notification
 
 ## Problem
 
