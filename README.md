@@ -27,11 +27,13 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 ## TODO
 
-- Create server-side function to retrieve metadata (Firebase or something else)
-- Add audio notification (Windows)
-- Stop Audio Handler on [notification swipe](https://github.com/ryanheise/audio_service/wiki/FAQ?ref=morioh.com&utm_source=morioh.com#how-can-i-stop-the-audio-handler-when-the-user-swipes-away-the-app-in-the-task-manager) (Android)
+- Create server-side function to retrieve metadata (Firebase or something else).
+- Add audio notification (Windows).
+- Stop Audio Handler on [notification swipe](https://github.com/ryanheise/audio_service/wiki/FAQ?ref=morioh.com&utm_source=morioh.com#how-can-i-stop-the-audio-handler-when-the-user-swipes-away-the-app-in-the-task-manager) (Android).
+- Figure out how to play stream in real time.
+  - Potential 1: Using ```seekForward()``` [method](https://pub.dev/documentation/audio_service/latest/audio_service/AudioHandler/seekForward.html).
 
 ## Problem
 
 - [Web](https://github.com/saifymatteo/mkr_flutter/blob/master/images/github/Mixed%20Content%20error.png): unable to get metadata due to ```Mixed Content``` issue (HTTP).
-- MacOS: unable to notarize the app for now
+- MacOS: unable to notarize the app for now.
