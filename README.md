@@ -31,7 +31,7 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 - Add audio notification (Windows).
 - Stop Audio Handler on [notification swipe](https://github.com/ryanheise/audio_service/wiki/FAQ?ref=morioh.com&utm_source=morioh.com#how-can-i-stop-the-audio-handler-when-the-user-swipes-away-the-app-in-the-task-manager) (Android).
 - Figure out how to play stream in real time.
-  - Potential 1: Using ```seekForward()``` [method](https://pub.dev/documentation/audio_service/latest/audio_service/AudioHandler/seekForward.html).
+  - Potential 1: Using ```seekForward()``` on ```Play``` method (To fix stream when user paused for a while). [The documentation](https://pub.dev/documentation/audio_service/latest/audio_service/AudioHandler/seekForward.html).
 - Audio stream broken suddenly. Possible [fix](https://github.com/ryanheise/just_audio/issues/4#issuecomment-643762611).
 - 1-DIFFERENT APPROACH: Another [package](https://pub.dev/packages/flutter_radio_player) that handle audio streaming (Android & iOS only).
 - 2-DIFFERENT APPROACH: Another [package](https://pub.dev/packages/assets_audio_player) for audio streaming (Android, iOS, MacOS and Web).
