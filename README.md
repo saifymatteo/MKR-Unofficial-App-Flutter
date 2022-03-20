@@ -30,8 +30,6 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 - Create server-side function to retrieve metadata (Firebase or something else).
 - Add audio notification (Windows).
 - Audio stream broken suddenly. Possible [fix](https://github.com/ryanheise/just_audio/issues/4#issuecomment-643762611).
-- 1-DIFFERENT APPROACH: Another [package](https://pub.dev/packages/flutter_radio_player) that handle audio streaming (Android & iOS only).
-- 2-DIFFERENT APPROACH: Another [package](https://pub.dev/packages/assets_audio_player) for audio streaming (Android, iOS, MacOS and Web).
 
 ## Problem
 
