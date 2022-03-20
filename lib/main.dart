@@ -30,14 +30,13 @@ Future<void> main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
 
-  await Firebase.initializeApp(
-    options: DefaultFirebaseOptions.currentPlatform,
-  );
-
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   // For Web
   if (kIsWeb) {
     runApp(MyApp(savedThemeMode: savedThemeMode));
+    await Firebase.initializeApp(
+      options: DefaultFirebaseOptions.currentPlatform,
+    );
   }
   // For Desktop Platform
   else if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
