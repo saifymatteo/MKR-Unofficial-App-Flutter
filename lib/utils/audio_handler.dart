@@ -37,7 +37,9 @@ class AudioPlayerHandler extends BaseAudioHandler {
   }
 
   void getMetadata() async {
+    // await audioMetadata.getURLMetadataFirebase(); // ! Firebase Test
     await audioMetadata.getURLMetadata();
+    debugPrint('');
     fileName = audioMetadata.fileName;
     debugPrint('fileName: $fileName');
     titleSong = audioMetadata.titleSong;
@@ -101,6 +103,8 @@ class AudioPlayerHandler extends BaseAudioHandler {
       controls: [MediaControl.pause],
     ));
     await audioPlayer.play();
+    // To jump to the latest stream position
+    await audioPlayer.seek(null); 
   }
 
   // Pause the audio
@@ -119,5 +123,12 @@ class AudioPlayerHandler extends BaseAudioHandler {
       processingState: AudioProcessingState.idle,
     ));
     await audioPlayer.stop();
+  }
+
+  @override
+  Future<void> onTaskRemoved() async {
+    if (!playbackState.value.playing) {
+      await audioPlayer.stop();
+    }
   }
 }
