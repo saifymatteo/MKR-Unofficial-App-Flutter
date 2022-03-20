@@ -1,4 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+// import 'package:cloud_functions/cloud_functions.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'firebase_options.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
@@ -26,6 +29,11 @@ Future<void> main() async {
     ),
   );
   WidgetsFlutterBinding.ensureInitialized();
+
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
+
   final savedThemeMode = await AdaptiveTheme.getThemeMode();
   // For Web
   if (kIsWeb) {
