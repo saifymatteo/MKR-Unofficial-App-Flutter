@@ -29,7 +29,6 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 - Create server-side function to retrieve metadata (Firebase or something else).
 - Add audio notification (Windows).
-- Stop Audio Handler on [notification swipe](https://github.com/ryanheise/audio_service/wiki/FAQ?ref=morioh.com&utm_source=morioh.com#how-can-i-stop-the-audio-handler-when-the-user-swipes-away-the-app-in-the-task-manager) (Android).
 - Audio stream broken suddenly. Possible [fix](https://github.com/ryanheise/just_audio/issues/4#issuecomment-643762611).
 - 1-DIFFERENT APPROACH: Another [package](https://pub.dev/packages/flutter_radio_player) that handle audio streaming (Android & iOS only).
 - 2-DIFFERENT APPROACH: Another [package](https://pub.dev/packages/assets_audio_player) for audio streaming (Android, iOS, MacOS and Web).
@@ -38,3 +37,7 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 - [Web](https://github.com/saifymatteo/mkr_flutter/blob/master/images/github/Mixed%20Content%20error.png): unable to get metadata due to ```Mixed Content``` issue (HTTP).
 - MacOS: unable to notarize the app for now.
+
+## Disclaimer
+
+This project is my first Flutter project and my very first 'professional' project. Do hit me up if you have any feedback.
