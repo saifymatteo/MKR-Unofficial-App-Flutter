@@ -1,5 +1,6 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:audio_service/audio_service.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mkr_flutter/utils/constant.dart';
@@ -33,46 +34,52 @@ class ListenNowScreen extends StatelessWidget {
               builder: (context, snapshot) {
                 final artistSong = snapshot.data?.artist ?? 'Various Artist';
                 final titleSong = snapshot.data?.title ?? 'Various Song';
-                return Padding(
-                  padding: const EdgeInsets.only(left: 30, right: 30),
-                  child: (artistSong == '')
-                      ? LoadingAnimationWidget.waveDots(
-                          color: kMKRColorMain, size: 40)
-                      : ValueListenableBuilder(
-                          valueListenable:
-                              AdaptiveTheme.of(context).modeChangeNotifier,
-                          builder: (_, mode, child) {
-                            return Column(
-                              children: [
-                                Text(
-                                  titleSong,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 20,
-                                    fontWeight: FontWeight.bold,
-                                    color: (mode == AdaptiveThemeMode.dark)
-                                        ? kMKRColorMainLight
-                                        : kMKRColorMain,
+                if (kIsWeb) {
+                  return const Padding(
+                    padding: EdgeInsets.only(left: 30, right: 30),
+                  );
+                } else {
+                  return Padding(
+                    padding: const EdgeInsets.only(left: 30, right: 30),
+                    child: (artistSong == '')
+                        ? LoadingAnimationWidget.waveDots(
+                            color: kMKRColorMain, size: 40)
+                        : ValueListenableBuilder(
+                            valueListenable:
+                                AdaptiveTheme.of(context).modeChangeNotifier,
+                            builder: (_, mode, child) {
+                              return Column(
+                                children: [
+                                  Text(
+                                    titleSong,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 20,
+                                      fontWeight: FontWeight.bold,
+                                      color: (mode == AdaptiveThemeMode.dark)
+                                          ? kMKRColorMainLight
+                                          : kMKRColorMain,
+                                    ),
                                   ),
-                                ),
-                                const SizedBox(
-                                  height: 5,
-                                ),
-                                Text(
-                                  artistSong,
-                                  textAlign: TextAlign.center,
-                                  style: TextStyle(
-                                    fontSize: 15,
-                                    color: (mode == AdaptiveThemeMode.dark)
-                                        ? kMKRColorMain
-                                        : kMKRColorMainDark,
+                                  const SizedBox(
+                                    height: 5,
                                   ),
-                                ),
-                              ],
-                            );
-                          },
-                        ),
-                );
+                                  Text(
+                                    artistSong,
+                                    textAlign: TextAlign.center,
+                                    style: TextStyle(
+                                      fontSize: 15,
+                                      color: (mode == AdaptiveThemeMode.dark)
+                                          ? kMKRColorMain
+                                          : kMKRColorMainDark,
+                                    ),
+                                  ),
+                                ],
+                              );
+                            },
+                          ),
+                  );
+                }
               },
             ),
             const SizedBox(
