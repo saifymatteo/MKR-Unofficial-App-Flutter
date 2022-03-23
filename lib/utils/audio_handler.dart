@@ -62,8 +62,13 @@ class AudioPlayerHandler extends BaseAudioHandler {
   }
 
   void periodicUpdateMetadata() {
-    timer = Timer.periodic(const Duration(seconds: 10), (timer) {
+    timer = Timer.periodic(const Duration(seconds: 10), (timer) async {
       getMetadata();
+
+      // Jump to the latest stream position every 10 seconds
+      if (!playbackState.value.playing) {
+        await audioPlayer.seek(null);
+      }
     });
   }
 
@@ -103,8 +108,6 @@ class AudioPlayerHandler extends BaseAudioHandler {
       controls: [MediaControl.pause],
     ));
     await audioPlayer.play();
-    // To jump to the latest stream position
-    await audioPlayer.seek(null); 
   }
 
   // Pause the audio
