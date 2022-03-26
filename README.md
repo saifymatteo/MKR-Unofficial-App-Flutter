@@ -6,9 +6,9 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 ## Platforms
 
-- [Android](https://github.com/saifymatteo/mkr_flutter/releases/download/v1.0.2/Android_MKR_Unofficial_App_v1.0.2.apk)
+- [Android](https://github.com/saifymatteo/MKR-Unofficial-App-Flutter/releases/download/v1.0.3/Android_MKR_Unofficial_App_v1.0.3.apk)
 - iOS
-- [Windows](https://github.com/saifymatteo/mkr_flutter/releases/download/v1.0.2/Windows_MKR_Unofficial_App_v1.0.2.7z)
+- [Windows](https://github.com/saifymatteo/MKR-Unofficial-App-Flutter/releases/download/v1.0.3/Windows_MKR_Unofficial_App_v1.0.3.zip)
 - MacOS
 - [Web](https://mkrunofficial.netlify.app/)
 
@@ -27,7 +27,6 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 ## TODO
 
-- Create server-side function to retrieve metadata (Firebase or something else).
 - Add audio notification (Windows).
 - Audio stream broken suddenly. Possible [fix](https://github.com/ryanheise/just_audio/issues/4#issuecomment-643762611).
 
