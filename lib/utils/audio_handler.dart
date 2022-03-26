@@ -12,9 +12,9 @@ class AudioPlayerHandler extends BaseAudioHandler {
 
   String radioURL = 'https://usa10.fastcast4u.com/voicespl';
 
-  String fileName = '';
   String titleSong = '';
   String artistSong = '';
+  String artURI = '';
 
   late MediaItem item;
 
@@ -37,15 +37,13 @@ class AudioPlayerHandler extends BaseAudioHandler {
   }
 
   void getMetadata() async {
-    // await audioMetadata.getURLMetadataFirebase(); // ! Firebase Test
     await audioMetadata.getURLMetadata();
     debugPrint('');
-    fileName = audioMetadata.fileName;
-    debugPrint('fileName: $fileName');
     titleSong = audioMetadata.titleSong;
     debugPrint('titleSong: $titleSong');
     artistSong = audioMetadata.artistSong;
     debugPrint('artistSong: $artistSong');
+    artURI = audioMetadata.artURI;
     updateNewMediaItem();
   }
 
@@ -55,8 +53,7 @@ class AudioPlayerHandler extends BaseAudioHandler {
       album: 'MKR Stream',
       title: titleSong,
       artist: artistSong,
-      artUri: Uri.parse(
-          'https://mykampusradio.com/wp-content/uploads/2022/02/MKR-logo-small-blue-e1645612000865.png'),
+      artUri: Uri.parse(artURI),
     );
     mediaItem.add(item);
   }
@@ -83,8 +80,7 @@ class AudioPlayerHandler extends BaseAudioHandler {
         album: 'MKR Stream',
         title: titleSong,
         artist: artistSong,
-        artUri: Uri.parse(
-            'https://mykampusradio.com/wp-content/uploads/2022/02/MKR-logo-small-blue-e1645612000865.png'),
+        artUri: Uri.parse(artURI),
       );
       return mediaItem;
     } catch (e) {
@@ -94,8 +90,7 @@ class AudioPlayerHandler extends BaseAudioHandler {
         album: 'MKR Stream',
         title: 'Various Song',
         artist: 'Various Artist',
-        artUri: Uri.parse(
-            'https://mykampusradio.com/wp-content/uploads/2022/02/MKR-logo-small-blue-e1645612000865.png'),
+        artUri: Uri.parse(artURI),
       );
     }
   }
