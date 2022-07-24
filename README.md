@@ -4,6 +4,8 @@
 
 A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?id=info.mykampusradio.station) with the main purpose is to be on multiple platform.
 
+<a href='https://play.google.com/store/apps/details?id=com.saifymatteo.mkr_flutter&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1'><img alt='Get it on Google Play' src='https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png' width=300 /></a>
+
 ## Platforms
 
 - [Android](https://github.com/saifymatteo/MKR-Unofficial-App-Flutter/releases/download/v1.0.3/Android_MKR_Unofficial_App_v1.0.3.apk)
