@@ -8,11 +8,11 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 ## Platforms
 
-- [Android](https://github.com/saifymatteo/MKR-Unofficial-App-Flutter/releases/download/v1.0.3/Android_MKR_Unofficial_App_v1.0.3.apk)
+- [Android](https://github.com/saifymatteo/MKR-Unofficial-App-Flutter/releases/latest)
 - iOS
-- [Windows](https://github.com/saifymatteo/MKR-Unofficial-App-Flutter/releases/download/v1.0.3/Windows_MKR_Unofficial_App_v1.0.3.zip)
+- [Windows](https://github.com/saifymatteo/MKR-Unofficial-App-Flutter/releases/latest)
 - MacOS
-- [Web](https://mkrunofficial.netlify.app/)
+- [Web](https://mkr.saifulmashuri.com/)
 
 ## Dependecies
 
