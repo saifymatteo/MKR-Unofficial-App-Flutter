@@ -8,13 +8,10 @@ import 'audio_metadata.dart';
 class AudioPlayerHandler extends BaseAudioHandler {
   final audioPlayer = AudioPlayer();
   final audioMetadata = AudioMetadata();
+
   late Timer timer;
 
-  String radioURL = 'https://usa10.fastcast4u.com/voicespl';
-
-  String titleSong = '';
-  String artistSong = '';
-  String artURI = '';
+  final _radioURL = 'https://usa10.fastcast4u.com/voicespl';
 
   late MediaItem item;
 
@@ -28,7 +25,7 @@ class AudioPlayerHandler extends BaseAudioHandler {
     mediaItem.add(item);
     periodicUpdateMetadata();
     // Connect to the URL
-    audioPlayer.setUrl(radioURL).then((_) {
+    audioPlayer.setUrl(_radioURL).then((_) {
       // Broadcast that we've finished loading
       playbackState.add(playbackState.value.copyWith(
         processingState: AudioProcessingState.ready,
@@ -38,22 +35,16 @@ class AudioPlayerHandler extends BaseAudioHandler {
 
   void getMetadata() async {
     await audioMetadata.getURLMetadata();
-    debugPrint('');
-    titleSong = audioMetadata.titleSong;
-    debugPrint('titleSong: $titleSong');
-    artistSong = audioMetadata.artistSong;
-    debugPrint('artistSong: $artistSong');
-    artURI = audioMetadata.artURI;
     updateNewMediaItem();
   }
 
   void updateNewMediaItem() {
     item = MediaItem(
-      id: radioURL,
+      id: _radioURL,
       album: 'MKR Stream',
-      title: titleSong,
-      artist: artistSong,
-      artUri: Uri.parse(artURI),
+      title: audioMetadata.titleSong,
+      artist: audioMetadata.artistSong,
+      artUri: Uri.parse(audioMetadata.artURI),
     );
     mediaItem.add(item);
   }
@@ -76,21 +67,21 @@ class AudioPlayerHandler extends BaseAudioHandler {
   MediaItem setMediaItem() {
     try {
       MediaItem mediaItem = MediaItem(
-        id: radioURL,
+        id: _radioURL,
         album: 'MKR Stream',
-        title: titleSong,
-        artist: artistSong,
-        artUri: Uri.parse(artURI),
+        title: audioMetadata.titleSong,
+        artist: audioMetadata.artistSong,
+        artUri: Uri.parse(audioMetadata.artURI),
       );
       return mediaItem;
     } catch (e) {
       debugPrint('Error: $e');
       return MediaItem(
-        id: radioURL,
+        id: _radioURL,
         album: 'MKR Stream',
         title: 'Various Song',
         artist: 'Various Artist',
-        artUri: Uri.parse(artURI),
+        artUri: Uri.tryParse(audioMetadata.artURI),
       );
     }
   }

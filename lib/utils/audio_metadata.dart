@@ -3,16 +3,22 @@ import 'dart:convert';
 import 'package:flutter/foundation.dart';
 
 class AudioMetadata {
-  String metaURL =
+  final _metaURL =
       'https://fastcast4u.com/player/voicespl/index.php?c=MyKampus%20Radio%20Stream';
-  String artURI = '';
-  String titleSong = '';
-  String artistSong = '';
+
+  String _artURI = '';
+  String get artURI => _artURI;
+
+  String _titleSong = '';
+  String get titleSong => _titleSong;
+
+  String _artistSong = '';
+  String get artistSong => _artistSong;
 
   Future<void> getURLMetadata() async {
     try {
       Response response = await get(
-        Uri.parse(metaURL),
+        Uri.parse(_metaURL),
         headers: {
           "Access-Control-Allow-Origin": "*",
           "Access-Control-Allow-Credentials": 'true',
@@ -23,12 +29,15 @@ class AudioMetadata {
       );
 
       if (response.statusCode == 200) {
-        artistSong = getArtistName(jsonDecode(response.body)["artist"]);
-        titleSong = getTitleName(jsonDecode(response.body)["title"]);
-        artURI = getArtURI(jsonDecode(response.body)["image"]);
-        debugPrint('Artist: $artistSong');
-        debugPrint('Title: $titleSong');
-        debugPrint('ArtURI: $artURI');
+        final body = jsonDecode(response.body);
+
+        _artistSong = _getArtistName(body["artist"]);
+        _titleSong = _getTitleName(body["title"]);
+        _artURI = _getArtURI(body["image"]);
+
+        debugPrint('Artist: $_artistSong');
+        debugPrint('Title: $_titleSong');
+        debugPrint('ArtURI: $_artURI');
       } else {
         debugPrint('${response.statusCode}');
         debugPrint('${response.reasonPhrase}');
@@ -38,24 +47,24 @@ class AudioMetadata {
     }
   }
 
-  String getArtistName(String name) {
-    if (titleSong == '') {
-      titleSong = artistSong;
+  String _getArtistName(String name) {
+    if (_titleSong == '') {
+      _titleSong = _artistSong;
       return '';
     } else {
       return name;
     }
   }
 
-  String getTitleName(String name) {
+  String _getTitleName(String name) {
     if (name == '') {
-      return artistSong;
+      return _artistSong;
     } else {
       return name;
     }
   }
 
-  String getArtURI(String name) {
+  String _getArtURI(String name) {
     if (name.contains('favicon.ico')) {
       return 'https://mykampusradio.com/wp-content/uploads/2022/02/MKR-logo-small-blue-e1645612000865.png';
     } else {

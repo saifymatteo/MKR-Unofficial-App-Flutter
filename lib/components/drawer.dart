@@ -6,11 +6,11 @@ import 'package:mkr_flutter/main.dart';
 
 class DrawerNav extends StatelessWidget {
   const DrawerNav({
-    Key? key,
-    required this.navigatorKey,
-  }) : super(key: key);
+    super.key,
+    // required this.navigatorKey,
+  });
 
-  final GlobalKey<NavigatorState> navigatorKey;
+  // final GlobalKey<NavigatorState> navigatorKey;
 
   @override
   Widget build(BuildContext context) {
@@ -35,8 +35,8 @@ class DrawerNav extends StatelessWidget {
             ),
             title: const Text('Listen Now!'),
             onTap: () {
-              Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.home);
+              Navigator.popAndPushNamed(context, Screen.home);
+              // navigatorKey.currentState!.pushNamed(Screen.home);
             },
           ),
           const Divider(
@@ -49,13 +49,13 @@ class DrawerNav extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
-              FontAwesomeIcons.globeAsia,
+              FontAwesomeIcons.earthAsia,
               color: kMKRColorMain,
             ),
             title: const Text('Laman Web'),
             onTap: () {
               Navigator.pop(context);
-              launch('https://mykampusradio.com/');
+              launchUrl(Uri.parse('https://mykampusradio.com/'));
             },
           ),
           ListTile(
@@ -66,7 +66,11 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Show Clip'),
             onTap: () {
               Navigator.pop(context);
-              launch('https://www.youtube.com/channel/UChVS7qvjXYiPuqYNtiAPOWw');
+              launchUrl(
+                Uri.parse(
+                  'https://www.youtube.com/channel/UChVS7qvjXYiPuqYNtiAPOWw',
+                ),
+              );
             },
           ),
           ListTile(
@@ -77,7 +81,11 @@ class DrawerNav extends StatelessWidget {
             title: const Text('MyKampus TV'),
             onTap: () {
               Navigator.pop(context);
-              launch('https://www.youtube.com/channel/UC0wQr4JFllCGu5lehj4gHGw');
+              launchUrl(
+                Uri.parse(
+                  'https://www.youtube.com/channel/UC0wQr4JFllCGu5lehj4gHGw',
+                ),
+              );
             },
           ),
           const Divider(
@@ -112,7 +120,7 @@ class DrawerNav extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
-              FontAwesomeIcons.instagramSquare,
+              FontAwesomeIcons.squareInstagram,
               color: kMKRColorMain,
             ),
             title: const Text('Instagram'),
@@ -148,7 +156,8 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Email'),
             onTap: () {
               Navigator.pop(context);
-              launch('mailto:mykampusradio@gmail.com?subject=Pertanyaan&body=##%20Dihantar%20dari%20aplikasi%20MKR%20##');
+              launch(
+                  'mailto:mykampusradio@gmail.com?subject=Pertanyaan&body=##%20Dihantar%20dari%20aplikasi%20MKR%20##');
             },
           ),
           ListTile(
@@ -164,7 +173,7 @@ class DrawerNav extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
-              FontAwesomeIcons.whatsappSquare,
+              FontAwesomeIcons.squareWhatsapp,
               color: kMKRColorMain,
             ),
             title: const Text('WhatsApp'),
@@ -199,12 +208,19 @@ class DrawerNav extends StatelessWidget {
             ),
             title: const Text('Settings'),
             onTap: () {
-              Navigator.pop(context);
-              navigatorKey.currentState!.pushNamed(Screen.settingsScreen);
+              Navigator.popAndPushNamed(context, Screen.settingsScreen);
+              // navigatorKey.currentState!.pushNamed(Screen.settingsScreen);
             },
           ),
         ],
       ),
     );
+  }
+}
+
+void _handleUrl(String url) async {
+  final uri = Uri.tryParse(url);
+  if (uri != null && await canLaunchUrl(uri)) {
+    await launchUrl(uri);
   }
 }

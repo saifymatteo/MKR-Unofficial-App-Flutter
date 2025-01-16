@@ -6,14 +6,12 @@ import 'package:loading_animation_widget/loading_animation_widget.dart';
 import 'package:mkr_flutter/utils/constant.dart';
 
 class ListenNowScreen extends StatelessWidget {
-  final AudioHandler audioHandler;
-  final GlobalKey<NavigatorState> navigatorKey;
-
   const ListenNowScreen({
-    Key? key,
+    super.key,
     required this.audioHandler,
-    required this.navigatorKey,
-  }) : super(key: key);
+  });
+
+  final AudioHandler audioHandler;
 
   @override
   Widget build(BuildContext context) {
@@ -61,9 +59,7 @@ class ListenNowScreen extends StatelessWidget {
                                           : kMKRColorMain,
                                     ),
                                   ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
+                                  const SizedBox(height: 5),
                                   Text(
                                     artistSong,
                                     textAlign: TextAlign.center,
@@ -82,31 +78,19 @@ class ListenNowScreen extends StatelessWidget {
                 }
               },
             ),
-            const SizedBox(
-              height: 5,
-            ),
+            const SizedBox(height: 5),
             StreamBuilder<PlaybackState>(
               stream: audioHandler.playbackState,
               builder: (context, snapshot) {
-                String statusAudio = '';
                 final processingState =
                     snapshot.data?.processingState ?? AudioProcessingState.idle;
-                switch (processingState) {
-                  case AudioProcessingState.loading:
-                    statusAudio = 'Audio: Loading';
-                    break;
-                  case AudioProcessingState.ready:
-                    statusAudio = 'Audio: Ready';
-                    break;
-                  case AudioProcessingState.idle:
-                    statusAudio = 'Audio: Idle';
-                    break;
-                  case AudioProcessingState.buffering:
-                    statusAudio = 'Audio: Buffering';
-                    break;
-                  default:
-                    statusAudio = 'Audio: Error';
-                }
+                final statusAudio = switch (processingState) {
+                  AudioProcessingState.loading => 'Audio: Loading',
+                  AudioProcessingState.ready => 'Audio: Ready',
+                  AudioProcessingState.idle => 'Audio: Idle',
+                  AudioProcessingState.buffering => 'Audio: Buffering',
+                  _ => 'Audio: Error'
+                };
                 return Text(
                   statusAudio,
                   textAlign: TextAlign.center,

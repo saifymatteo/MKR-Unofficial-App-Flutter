@@ -9,34 +9,27 @@ import 'package:mkr_flutter/screens/listen_now_screen.dart';
 import 'package:mkr_flutter/screens/settings_screen.dart';
 import 'package:mkr_flutter/screens/error_screen.dart';
 
-class MainScreen extends StatefulWidget {
+class MainScreen extends StatelessWidget {
   const MainScreen({
-    Key? key,
+    super.key,
     required this.audioHandler,
     required this.title,
     required this.route,
-    required this.navigatorKey,
-  }) : super(key: key);
+  });
 
   final AudioHandler audioHandler;
   final String title;
   final String route;
-  final GlobalKey<NavigatorState> navigatorKey;
 
-  @override
-  State<MainScreen> createState() => _MainScreenState();
-}
-
-class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.title),
+        title: Text(title),
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: StreamBuilder<PlaybackState>(
-        stream: widget.audioHandler.playbackState,
+        stream: audioHandler.playbackState,
         builder: (context, snapshot) {
           final playing = snapshot.data?.playing ?? false;
           String isPlaying = playing ? 'Pause' : 'Play';
@@ -46,14 +39,16 @@ class _MainScreenState extends State<MainScreen> {
             padding: const EdgeInsets.only(bottom: 20),
             child: (processingState == AudioProcessingState.loading)
                 ? LoadingAnimationWidget.staggeredDotsWave(
-                    color: kMKRColorMain, size: 60)
+                    color: kMKRColorMain,
+                    size: 60,
+                  )
                 : FloatingActionButton.extended(
                     onPressed: () {
                       if (playing) {
-                        widget.audioHandler.pause();
+                        audioHandler.pause();
                         debugPrint('Audio is pause');
                       } else {
-                        widget.audioHandler.play();
+                        audioHandler.play();
                         debugPrint('Audio is playing');
                       }
                     },
@@ -66,33 +61,20 @@ class _MainScreenState extends State<MainScreen> {
           );
         },
       ),
-      drawer: DrawerNav(
-        navigatorKey: widget.navigatorKey,
-      ),
+      drawer: DrawerNav(),
       body: Navigator(
-        onGenerateRoute: (RouteSettings settings) {
-          WidgetBuilder builder;
-          switch (widget.route) {
-            case Screen.home:
-              builder = (BuildContext context) => listenNowScreen();
-              break;
-            case Screen.settingsScreen:
-              builder = (BuildContext context) => settingsScreen();
-              break;
-            default:
-              builder = (BuildContext context) => const ErrorScreen();
-          }
+        onGenerateRoute: (settings) {
           return MaterialPageRoute(
-            builder: builder,
             settings: settings,
+            builder: switch (route) {
+              Screen.home => (context) =>
+                  ListenNowScreen(audioHandler: audioHandler),
+              Screen.settingsScreen => (context) => SettingScreen(),
+              _ => (context) => const ErrorScreen()
+            },
           );
         },
       ),
     );
   }
-
-  Widget listenNowScreen() => ListenNowScreen(
-      audioHandler: widget.audioHandler, navigatorKey: widget.navigatorKey);
-
-  Widget settingsScreen() => SettingScreen(navigatorKey: widget.navigatorKey);
 }

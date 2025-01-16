@@ -1,7 +1,4 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
-// import 'package:cloud_functions/cloud_functions.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:audio_service/audio_service.dart';
@@ -15,6 +12,7 @@ import 'package:desktop_window/desktop_window.dart';
 import 'dart:io';
 
 late AudioHandler audioHandler;
+
 Future<void> main() async {
   audioHandler = await AudioService.init(
     builder: () => AudioPlayerHandler(),
@@ -30,36 +28,31 @@ Future<void> main() async {
   );
   WidgetsFlutterBinding.ensureInitialized();
 
-  final savedThemeMode = await AdaptiveTheme.getThemeMode();
   // For Web
   if (kIsWeb) {
-    runApp(MyApp(savedThemeMode: savedThemeMode));
-    await Firebase.initializeApp(
-      options: DefaultFirebaseOptions.currentPlatform,
-    );
+    // TODO:
   }
   // For Desktop Platform
   else if (Platform.isWindows || Platform.isLinux || Platform.isMacOS) {
     await DesktopWindow.setMinWindowSize(const Size(360, 640));
     await DesktopWindow.setMaxWindowSize(const Size(720, 1280));
-    runApp(MyApp(savedThemeMode: savedThemeMode));
   }
   // For Mobile Platform
   else if (Platform.isAndroid || Platform.isIOS) {
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(
-      (value) => runApp(MyApp(savedThemeMode: savedThemeMode)),
-    );
+    await SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
-  // For Everything else
-  else {
-    runApp(MyApp(savedThemeMode: savedThemeMode));
-  }
+
+  final savedTheme = await AdaptiveTheme.getThemeMode();
+
+  runApp(
+    MyApp(savedTheme: savedTheme),
+  );
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({this.savedThemeMode, Key? key}) : super(key: key);
-  final mainNavigatorKey = GlobalKey<NavigatorState>();
-  final AdaptiveThemeMode? savedThemeMode;
+  const MyApp({super.key, this.savedTheme});
+
+  final AdaptiveThemeMode? savedTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -75,32 +68,27 @@ class MyApp extends StatelessWidget {
         brightness: Brightness.dark,
         primaryColor: kMKRColorMain,
         textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme.apply(
-                bodyColor: Colors.white,
-              ),
+          Theme.of(context).textTheme.apply(bodyColor: Colors.white),
         ),
         floatingActionButtonTheme: const FloatingActionButtonThemeData(
           foregroundColor: Colors.white,
         ),
       ),
-      initial: savedThemeMode ?? AdaptiveThemeMode.light,
+      initial: savedTheme ?? AdaptiveThemeMode.light,
       builder: (lightTheme, darkTheme) => MaterialApp(
         title: 'MyKampus Radio Unofficial',
         theme: lightTheme,
         darkTheme: darkTheme,
-        navigatorKey: mainNavigatorKey,
         routes: {
           Screen.home: (context) => MainScreen(
                 audioHandler: audioHandler,
                 title: 'MyKampus Radio',
                 route: Screen.home,
-                navigatorKey: mainNavigatorKey,
               ),
           Screen.settingsScreen: (context) => MainScreen(
                 audioHandler: audioHandler,
                 title: 'Settings',
                 route: Screen.settingsScreen,
-                navigatorKey: mainNavigatorKey,
               ),
         },
       ),
@@ -110,15 +98,15 @@ class MyApp extends StatelessWidget {
 
 class Screen {
   static const home = '/';
-  static const lamanWebScreen = '/lamanWebScreen';
-  static const showClipScreen = '/showClipScreen';
-  static const myKampusTvScreen = '/myKampusTVScreen';
-  static const socmedFacebookScreen = '/socmedFacebookScreen';
-  static const socmedTwitterScreen = '/socmedTwitterScreen';
-  static const socmedInstagramScreen = '/socmedInstagramScreen';
-  static const socmedTikTokScreen = '/socmedTikTokScreen';
-  static const telephoneScreen = '/telephoneScreen';
-  static const whatsappScreen = '/whatsappScreen';
-  static const lokasiScreen = '/lokasiScreen';
-  static const settingsScreen = '/settingsScreen';
+  static const lamanWebScreen = '/laman-web';
+  static const showClipScreen = '/show-clip';
+  static const myKampusTvScreen = '/my-kampus-tv';
+  static const socmedFacebookScreen = '/social-facebook';
+  static const socmedTwitterScreen = '/social-twitter';
+  static const socmedInstagramScreen = '/social-instagram';
+  static const socmedTikTokScreen = '/social-tiktok';
+  static const telephoneScreen = '/social-telephone';
+  static const whatsappScreen = '/contact-whatsapp';
+  static const lokasiScreen = '/location';
+  static const settingsScreen = '/setting';
 }
