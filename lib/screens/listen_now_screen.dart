@@ -39,9 +39,11 @@ class ListenNowScreen extends StatelessWidget {
                 } else {
                   return Padding(
                     padding: const EdgeInsets.only(left: 30, right: 30),
-                    child: (artistSong == '')
+                    child: (!snapshot.hasData)
                         ? LoadingAnimationWidget.waveDots(
-                            color: kMKRColorMain, size: 40)
+                            color: kMKRColorMain,
+                            size: 40,
+                          )
                         : ValueListenableBuilder(
                             valueListenable:
                                 AdaptiveTheme.of(context).modeChangeNotifier,

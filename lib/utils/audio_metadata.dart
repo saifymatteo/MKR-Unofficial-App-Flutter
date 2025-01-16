@@ -1,3 +1,4 @@
+import 'package:audio_service/audio_service.dart';
 import 'package:http/http.dart';
 import 'dart:convert';
 import 'package:flutter/foundation.dart';
@@ -14,6 +15,9 @@ class AudioMetadata {
 
   String _artistSong = '';
   String get artistSong => _artistSong;
+
+  late MediaItem _currentMediaItem;
+  MediaItem get currentMediaItem => _currentMediaItem;
 
   Future<void> getURLMetadata() async {
     try {
@@ -38,12 +42,28 @@ class AudioMetadata {
         debugPrint('Artist: $_artistSong');
         debugPrint('Title: $_titleSong');
         debugPrint('ArtURI: $_artURI');
+
+        _currentMediaItem = MediaItem(
+          id: _artURI,
+          title: _titleSong,
+          album: 'MKR Stream',
+          artist: _artistSong,
+          artUri: Uri.parse(_artURI),
+        );
       } else {
         debugPrint('${response.statusCode}');
         debugPrint('${response.reasonPhrase}');
       }
     } catch (e) {
       debugPrint('Error: $e');
+
+      _currentMediaItem = MediaItem(
+        id: DateTime.now().microsecondsSinceEpoch.toString(),
+        album: 'MKR Stream',
+        title: 'Various Song',
+        artist: 'Various Artist',
+        artUri: Uri.tryParse(_artURI),
+      );
     }
   }
 

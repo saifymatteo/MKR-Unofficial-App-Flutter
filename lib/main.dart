@@ -11,11 +11,16 @@ import 'package:flutter/services.dart';
 import 'package:desktop_window/desktop_window.dart';
 import 'dart:io';
 
-late AudioHandler audioHandler;
+late AudioHandler _audioHandler;
 
 Future<void> main() async {
-  audioHandler = await AudioService.init(
-    builder: () => AudioPlayerHandler(),
+  WidgetsFlutterBinding.ensureInitialized();
+
+  final playerHandler = AudioPlayerHandler();
+  await playerHandler.initialisePlayer();
+
+  _audioHandler = await AudioService.init(
+    builder: () => playerHandler,
     config: const AudioServiceConfig(
       androidNotificationChannelId: 'com.saifymatteo.mkr_flutter.channel.audio',
       androidNotificationChannelName: 'Radio Playback',
@@ -26,7 +31,6 @@ Future<void> main() async {
       androidResumeOnClick: true,
     ),
   );
-  WidgetsFlutterBinding.ensureInitialized();
 
   // For Web
   if (kIsWeb) {
@@ -81,12 +85,12 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme,
         routes: {
           Screen.home: (context) => MainScreen(
-                audioHandler: audioHandler,
+                audioHandler: _audioHandler,
                 title: 'MyKampus Radio',
                 route: Screen.home,
               ),
           Screen.settingsScreen: (context) => MainScreen(
-                audioHandler: audioHandler,
+                audioHandler: _audioHandler,
                 title: 'Settings',
                 route: Screen.settingsScreen,
               ),

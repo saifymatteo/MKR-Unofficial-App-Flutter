@@ -90,14 +90,14 @@ class DrawerNav extends StatelessWidget {
             title: const Text('Twitter'),
             onTap: () => _handleUrl('https://twitter.com/mykampusradio'),
           ),
-          ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.squareInstagram,
-              color: kMKRColorMain,
-            ),
-            title: const Text('Instagram'),
-            onTap: () => _handleUrl('https://www.instagram.com/mykampus_radio'),
-          ),
+          // ListTile(
+          //   leading: FaIcon(
+          //     FontAwesomeIcons.squareInstagram,
+          //     color: kMKRColorMain,
+          //   ),
+          //   title: const Text('Instagram'),
+          //   onTap: () => _handleUrl('https://www.instagram.com/mykampus_radio'),
+          // ),
           ListTile(
             leading: FaIcon(
               FontAwesomeIcons.tiktok,
