@@ -49,4 +49,6 @@ android/app/google-services.json
 /lib/firebase_options.dart
 
 # Custom rules
-.fvm/flutter_sdk
+
+# FVM Version Cache
+.fvm/
