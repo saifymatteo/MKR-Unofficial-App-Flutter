@@ -34,15 +34,9 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Listen Now!'),
-            onTap: () {
-              Navigator.popAndPushNamed(context, Screen.home);
-              // navigatorKey.currentState!.pushNamed(Screen.home);
-            },
+            onTap: () => Navigator.pushReplacementNamed(context, Screen.home),
           ),
-          const Divider(
-            height: 20,
-            thickness: 1,
-          ),
+          const Divider(height: 20, thickness: 1),
           const Padding(
             padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
             child: Text('Content Hangat!'),
@@ -53,10 +47,7 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Laman Web'),
-            onTap: () {
-              Navigator.pop(context);
-              launchUrl(Uri.parse('https://mykampusradio.com/'));
-            },
+            onTap: () => _handleUrl('https://mykampusradio.com/'),
           ),
           ListTile(
             leading: Icon(
@@ -64,14 +55,9 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Show Clip'),
-            onTap: () {
-              Navigator.pop(context);
-              launchUrl(
-                Uri.parse(
-                  'https://www.youtube.com/channel/UChVS7qvjXYiPuqYNtiAPOWw',
-                ),
-              );
-            },
+            onTap: () => _handleUrl(
+              'https://www.youtube.com/channel/UChVS7qvjXYiPuqYNtiAPOWw',
+            ),
           ),
           ListTile(
             leading: FaIcon(
@@ -79,19 +65,11 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('MyKampus TV'),
-            onTap: () {
-              Navigator.pop(context);
-              launchUrl(
-                Uri.parse(
-                  'https://www.youtube.com/channel/UC0wQr4JFllCGu5lehj4gHGw',
-                ),
-              );
-            },
+            onTap: () => _handleUrl(
+              'https://www.youtube.com/channel/UC0wQr4JFllCGu5lehj4gHGw',
+            ),
           ),
-          const Divider(
-            height: 20,
-            thickness: 1,
-          ),
+          const Divider(height: 20, thickness: 1),
           const Padding(
             padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
             child: Text('Social Media'),
@@ -102,10 +80,7 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Facebook'),
-            onTap: () {
-              Navigator.pop(context);
-              launch('https://www.facebook.com/mykampusradio/');
-            },
+            onTap: () => _handleUrl('https://www.facebook.com/mykampusradio/'),
           ),
           ListTile(
             leading: FaIcon(
@@ -113,10 +88,7 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Twitter'),
-            onTap: () {
-              Navigator.pop(context);
-              launch('https://twitter.com/mykampusradio');
-            },
+            onTap: () => _handleUrl('https://twitter.com/mykampusradio'),
           ),
           ListTile(
             leading: FaIcon(
@@ -124,10 +96,7 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Instagram'),
-            onTap: () {
-              Navigator.pop(context);
-              launch('https://www.instagram.com/mykampus_radio');
-            },
+            onTap: () => _handleUrl('https://www.instagram.com/mykampus_radio'),
           ),
           ListTile(
             leading: FaIcon(
@@ -135,15 +104,9 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('TikTok'),
-            onTap: () {
-              Navigator.pop(context);
-              launch('https://www.tiktok.com/@mykampus_radio');
-            },
+            onTap: () => _handleUrl('https://www.tiktok.com/@mykampus_radio'),
           ),
-          const Divider(
-            height: 20,
-            thickness: 1,
-          ),
+          const Divider(height: 20, thickness: 1),
           const Padding(
             padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
             child: Text('Hubungi Kami'),
@@ -154,11 +117,9 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Email'),
-            onTap: () {
-              Navigator.pop(context);
-              launch(
-                  'mailto:mykampusradio@gmail.com?subject=Pertanyaan&body=##%20Dihantar%20dari%20aplikasi%20MKR%20##');
-            },
+            onTap: () => _handleUrl(
+              'mailto:mykampusradio@gmail.com?subject=Pertanyaan&body=##%20Dihantar%20dari%20aplikasi%20MKR%20##',
+            ),
           ),
           ListTile(
             leading: Icon(
@@ -166,10 +127,7 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Telephone'),
-            onTap: () {
-              Navigator.pop(context);
-              launch('tel:+60395202595');
-            },
+            onTap: () => _handleUrl('tel:+60395202595'),
           ),
           ListTile(
             leading: FaIcon(
@@ -177,10 +135,7 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('WhatsApp'),
-            onTap: () {
-              Navigator.pop(context);
-              launch('https://wa.me/60122970491');
-            },
+            onTap: () => _handleUrl('https://wa.me/60122970491'),
           ),
           ListTile(
             leading: Icon(
@@ -188,15 +143,9 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Lokasi'),
-            onTap: () {
-              Navigator.pop(context);
-              launch('https://goo.gl/maps/cjK65Rr6t2nw7aJE7');
-            },
+            onTap: () => _handleUrl('https://goo.gl/maps/cjK65Rr6t2nw7aJE7'),
           ),
-          const Divider(
-            height: 20,
-            thickness: 1,
-          ),
+          const Divider(height: 20, thickness: 1),
           const Padding(
             padding: EdgeInsets.only(left: 15, top: 10, bottom: 10),
             child: Text('Extra'),
@@ -207,10 +156,8 @@ class DrawerNav extends StatelessWidget {
               color: kMKRColorMain,
             ),
             title: const Text('Settings'),
-            onTap: () {
-              Navigator.popAndPushNamed(context, Screen.settingsScreen);
-              // navigatorKey.currentState!.pushNamed(Screen.settingsScreen);
-            },
+            onTap: () =>
+                Navigator.pushReplacementNamed(context, Screen.settingsScreen),
           ),
         ],
       ),
