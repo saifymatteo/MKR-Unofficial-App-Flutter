@@ -1,4 +1,4 @@
-package com.example.mkr_flutter
+package com.saifymatteo.mkr_flutter
 
 import io.flutter.embedding.android.FlutterActivity
 

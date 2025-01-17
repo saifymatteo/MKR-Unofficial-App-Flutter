@@ -3,10 +3,10 @@ description: Fan made of MyKampus Radio mobile apps.
 
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 1.0.4+2
+version: 1.0.5+3
 
 environment:
-  sdk: ">=3.0.0 <4.0.0"
+  sdk: ">=3.6.1 <4.0.0"
 
 dependency_overrides:
   path_provider: 2.1.5
@@ -32,17 +32,8 @@ dev_dependencies:
   flutter_lints: ^5.0.0
   flutter_test:
     sdk: flutter
-  msix: ^3.16.8
 
 flutter:
   uses-material-design: true
   assets:
     - images/
-
-msix_config:
-  display_name: MKR Unofficial App
-  publisher_display_name: saifymatteo
-  identity_name: com.saifymatteo.mkr-flutter
-  logo_path: images\launcher\mkr-launcher.png
-  capabilities: internetClient
-  languages: ms-my, en-us
