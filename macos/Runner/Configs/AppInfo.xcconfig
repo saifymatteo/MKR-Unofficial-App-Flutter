@@ -8,7 +8,7 @@
 PRODUCT_NAME = MyKampus Radio Unofficial;
 
 // The application's bundle identifier
-PRODUCT_BUNDLE_IDENTIFIER = com.saifymatteo.mkr_flutter;
+PRODUCT_BUNDLE_IDENTIFIER = com.saifymatteo.mkrFlutter
 
 // The copyright displayed in application information
 PRODUCT_COPYRIGHT = Copyright © 2022 package_name. All rights reserved.
