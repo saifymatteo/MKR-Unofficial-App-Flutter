@@ -48,9 +48,7 @@ Future<void> main() async {
 
   final savedTheme = await AdaptiveTheme.getThemeMode();
 
-  runApp(
-    MyApp(savedTheme: savedTheme),
-  );
+  runApp(MyApp(savedTheme: savedTheme));
 }
 
 class MyApp extends StatelessWidget {
@@ -64,8 +62,9 @@ class MyApp extends StatelessWidget {
       light: ThemeData(
         brightness: Brightness.light,
         primaryColor: kMKRColorMain,
-        textTheme: GoogleFonts.poppinsTextTheme(
-          Theme.of(context).textTheme,
+        textTheme: GoogleFonts.poppinsTextTheme(Theme.of(context).textTheme),
+        floatingActionButtonTheme: const FloatingActionButtonThemeData(
+          foregroundColor: Colors.white,
         ),
       ),
       dark: ThemeData(
@@ -85,15 +84,15 @@ class MyApp extends StatelessWidget {
         darkTheme: darkTheme,
         routes: {
           Screen.home: (context) => MainScreen(
-                audioHandler: _audioHandler,
-                title: 'MyKampus Radio',
-                route: Screen.home,
-              ),
+            audioHandler: _audioHandler,
+            title: 'MyKampus Radio',
+            route: Screen.home,
+          ),
           Screen.settingsScreen: (context) => MainScreen(
-                audioHandler: _audioHandler,
-                title: 'Settings',
-                route: Screen.settingsScreen,
-              ),
+            audioHandler: _audioHandler,
+            title: 'Settings',
+            route: Screen.settingsScreen,
+          ),
         },
       ),
     );

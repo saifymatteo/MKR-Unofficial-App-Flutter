@@ -84,10 +84,10 @@ class DrawerNav extends StatelessWidget {
           ),
           ListTile(
             leading: FaIcon(
-              FontAwesomeIcons.twitter,
+              FontAwesomeIcons.xTwitter,
               color: kMKRColorMain,
             ),
-            title: const Text('Twitter'),
+            title: const Text('X (Twitter)'),
             onTap: () => _handleUrl('https://twitter.com/mykampusradio'),
           ),
           // ListTile(
@@ -121,22 +121,22 @@ class DrawerNav extends StatelessWidget {
               'mailto:mykampusradio@gmail.com?subject=Pertanyaan&body=##%20Dihantar%20dari%20aplikasi%20MKR%20##',
             ),
           ),
-          ListTile(
-            leading: Icon(
-              Icons.call,
-              color: kMKRColorMain,
-            ),
-            title: const Text('Telephone'),
-            onTap: () => _handleUrl('tel:+60395202595'),
-          ),
-          ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.squareWhatsapp,
-              color: kMKRColorMain,
-            ),
-            title: const Text('WhatsApp'),
-            onTap: () => _handleUrl('https://wa.me/60122970491'),
-          ),
+          // ListTile(
+          //   leading: Icon(
+          //     Icons.call,
+          //     color: kMKRColorMain,
+          //   ),
+          //   title: const Text('Telephone'),
+          //   onTap: () => _handleUrl('tel:+60395202595'),
+          // ),
+          // ListTile(
+          //   leading: FaIcon(
+          //     FontAwesomeIcons.squareWhatsapp,
+          //     color: kMKRColorMain,
+          //   ),
+          //   title: const Text('WhatsApp'),
+          //   onTap: () => _handleUrl('https://wa.me/60122970491'),
+          // ),
           ListTile(
             leading: Icon(
               Icons.place,

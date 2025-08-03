@@ -29,27 +29,29 @@ class AudioPlayerHandler extends BaseAudioHandler {
       await audioPlayer.setUrl(_radioURL);
 
       // Broadcast that we've finished loading
-      playbackState.add(playbackState.value.copyWith(
-        processingState: AudioProcessingState.ready,
-      ));
+      playbackState.add(
+        playbackState.value.copyWith(
+          processingState: AudioProcessingState.ready,
+        ),
+      );
     } on PlayerException catch (e) {
       debugPrint('PlayerException: $e');
     } on PlayerInterruptedException catch (e) {
       debugPrint('PlayerInterruptedException: $e');
     }
 
-    audioPlayer.playbackEventStream.listen((event) {}, onError: (
-      Object e,
-      StackTrace st,
-    ) {
-      if (e is PlatformException) {
-        debugPrint('Error code: ${e.code}');
-        debugPrint('Error message: ${e.message}');
-        debugPrint('AudioSource index: ${e.details?["index"]}');
-      } else {
-        debugPrint('An error occurred: $e');
-      }
-    });
+    audioPlayer.playbackEventStream.listen(
+      (event) {},
+      onError: (Object e, StackTrace st) {
+        if (e is PlatformException) {
+          debugPrint('Error code: ${e.code}');
+          debugPrint('Error message: ${e.message}');
+          debugPrint('AudioSource index: ${e.details?["index"]}');
+        } else {
+          debugPrint('An error occurred: $e');
+        }
+      },
+    );
   }
 
   void periodicUpdateMetadata() {
@@ -72,28 +74,32 @@ class AudioPlayerHandler extends BaseAudioHandler {
   // Play the audio
   @override
   Future<void> play() async {
-    playbackState.add(playbackState.value.copyWith(
-      playing: true,
-      controls: [MediaControl.pause],
-    ));
+    playbackState.add(
+      playbackState.value.copyWith(
+        playing: true,
+        controls: [MediaControl.pause],
+      ),
+    );
     await audioPlayer.play();
   }
 
   // Pause the audio
   @override
   Future<void> pause() async {
-    playbackState.add(playbackState.value.copyWith(
-      playing: false,
-      controls: [MediaControl.play],
-    ));
+    playbackState.add(
+      playbackState.value.copyWith(
+        playing: false,
+        controls: [MediaControl.play],
+      ),
+    );
     await audioPlayer.pause();
   }
 
   @override
   Future<void> stop() async {
-    playbackState.add(playbackState.value.copyWith(
-      processingState: AudioProcessingState.idle,
-    ));
+    playbackState.add(
+      playbackState.value.copyWith(processingState: AudioProcessingState.idle),
+    );
     await audioPlayer.stop();
   }
 

@@ -35,14 +35,27 @@ class MainScreen extends StatelessWidget {
           String isPlaying = playing ? 'Pause' : 'Play';
           final processingState =
               snapshot.data?.processingState ?? AudioProcessingState.idle;
+
+          final statusAudio = switch (processingState) {
+            AudioProcessingState.loading => 'Audio: Loading',
+            AudioProcessingState.ready => 'Audio: Ready',
+            AudioProcessingState.idle => 'Audio: Idle',
+            AudioProcessingState.buffering => 'Audio: Buffering',
+            _ => 'Audio: Error'
+          };
+
           return Padding(
             padding: const EdgeInsets.only(bottom: 20),
-            child: (processingState == AudioProcessingState.loading)
-                ? LoadingAnimationWidget.staggeredDotsWave(
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                if (processingState == AudioProcessingState.loading)
+                  LoadingAnimationWidget.staggeredDotsWave(
                     color: kMKRColorMain,
                     size: 60,
                   )
-                : FloatingActionButton.extended(
+                else
+                  FloatingActionButton.extended(
                     onPressed: () {
                       if (playing) {
                         audioHandler.pause();
@@ -58,6 +71,17 @@ class MainScreen extends StatelessWidget {
                         ? const Icon(Icons.pause_rounded)
                         : const Icon(Icons.play_arrow_rounded),
                   ),
+                const SizedBox(height: 10),
+                Text(
+                  statusAudio,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(
+                    fontSize: 10,
+                    color: Colors.grey[400],
+                  ),
+                ),
+              ],
+            ),
           );
         },
       ),
