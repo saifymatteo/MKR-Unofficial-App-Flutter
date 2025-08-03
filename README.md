@@ -38,6 +38,49 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 - MacOS: unable to notarize the app for now.
 - iOS: unable to create IPA or publish to App Store due to cost
 
+## Technology
+
+- Flutter: `3.32.8`
+- Dart: `3.8.1`
+
+## Compiles
+
+### Pre-requisite
+
+Use PowerShell with YAML module
+
+```PowerShell
+Install-Module -Name powershell-yaml
+Import-Module powershell-yaml
+```
+
+### Builds
+
+```PowerShell
+# Create folder
+New-Item -Path ".\build\deploy" -ItemType Directory -Force
+
+# Get pubspec
+$content = Get-Content -Path "./pubspec.yaml" -Raw
+$pubspec = ConvertFrom-Yaml -Yaml $content
+
+# Web
+flutter build web --release --wasm --verbose
+Compress-Archive -Path ".\build\web\*" -DestinationPath ".\build\deploy\MKR-Unofficial-App-v$($pubspec.version)-Web.zip" -Force
+
+# Android APK
+flutter build apk --release --verbose
+Copy-Item -Path ".\build\app\outputs\flutter-apk\app-release.apk" -Destination ".\build\deploy\MKR-Unofficial-App-v$($pubspec.version)-Android.apk" -Force -Recurse
+
+# Android App Bundle
+flutter build appbundle --release --verbose
+Copy-Item -Path ".\build\app\outputs\bundle\release\app-release.aab" -Destination ".\build\deploy\MKR-Unofficial-App-v$($pubspec.version)-Android.aab" -Force -Recurse
+
+# Windows
+flutter build windows --release --verbose
+Compress-Archive -Path ".\build\windows\x64\runner\Release\*" -DestinationPath ".\build\deploy\MKR-Unofficial-App-v$($pubspec.version)-Windows.zip" -Force
+```
+
 ## Disclaimer
 
 This project is my first Flutter project and my very first 'professional' project. Do hit me up if you have any feedback.
