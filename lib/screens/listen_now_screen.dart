@@ -57,31 +57,37 @@ class ListenNowScreen extends StatelessWidget {
                                 ),
                                 const SizedBox(width: 20),
                               ],
-                              Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                crossAxisAlignment: CrossAxisAlignment.start,
-                                children: [
-                                  Text(
-                                    titleSong,
-                                    style: TextStyle(
-                                      fontSize: 20,
-                                      fontWeight: FontWeight.bold,
-                                      color: (mode == AdaptiveThemeMode.dark)
-                                          ? kMKRColorMainLight
-                                          : kMKRColorMain,
+                              Flexible(
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  crossAxisAlignment: CrossAxisAlignment.start,
+                                  children: [
+                                    Text(
+                                      titleSong,
+                                      style: TextStyle(
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.bold,
+                                        color: (mode == AdaptiveThemeMode.dark)
+                                            ? kMKRColorMainLight
+                                            : kMKRColorMain,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                  const SizedBox(height: 5),
-                                  Text(
-                                    artistSong,
-                                    style: TextStyle(
-                                      fontSize: 15,
-                                      color: (mode == AdaptiveThemeMode.dark)
-                                          ? kMKRColorMain
-                                          : kMKRColorMainDark,
+                                    const SizedBox(height: 5),
+                                    Text(
+                                      artistSong,
+                                      style: TextStyle(
+                                        fontSize: 15,
+                                        color: (mode == AdaptiveThemeMode.dark)
+                                            ? kMKRColorMain
+                                            : kMKRColorMainDark,
+                                      ),
+                                      maxLines: 1,
+                                      overflow: TextOverflow.ellipsis,
                                     ),
-                                  ),
-                                ],
+                                  ],
+                                ),
                               ),
                             ],
                           );
