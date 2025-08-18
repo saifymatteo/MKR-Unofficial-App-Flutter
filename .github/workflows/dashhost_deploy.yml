@@ -1,0 +1,78 @@
+on:
+  push:
+    branches:
+      - master
+  workflow_dispatch: {}
+
+name: Deploy Dashhost App
+
+jobs:
+  dashhost-build:
+    runs-on: ubuntu-latest
+
+    env:
+      API_KEY: ${{ secrets.DASHHOST_APP_TOKEN }}
+      APP_ID: ${{ secrets.DASHHOST_APP_ID }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Init deployment and get deployment tag
+        id: init_deploy
+        run: |
+          GH_URL="https://github.com/${{ github.repository }}/actions/runs/${{ github.run_id }}"
+
+          response=$(jq -n --arg url "$GH_URL" '{logs_url: $url}' | \
+            curl -s -X POST \
+              -H "Content-Type: application/json" \
+              -d @- \
+              https://api.dashhost.app/v1/project/init-deploy/$APP_ID/$API_KEY/)
+
+          echo "Response: $response"
+
+          tag=$(echo "$response" | jq -r '.deployment_tag')
+
+          if [ -z "$tag" ] || [ "$tag" == "null" ]; then
+            echo "Failed to extract deployment_tag from response."
+            exit 1
+          fi
+
+          echo "deployment_tag=$tag" >> $GITHUB_OUTPUT
+
+      - name: Fetch environment variables
+        id: fetch_env
+        run: |
+          curl -s https://api.dashhost.app/v1/project/env/$APP_ID/$API_KEY/ > env.json
+          jq -r 'to_entries[] | "--dart-define \(.key)=\(.value)"' env.json > dart_defines.txt
+
+      - name: Fetch Config
+        id: fetch_config
+        run: |
+          curl -s https://api.dashhost.app/v1/project/config/$APP_ID/$API_KEY/ > config.json
+          FLUTTER_VERSION=$(jq -r '.flutter_version' config.json)
+          echo "flutter_version=$FLUTTER_VERSION" >> $GITHUB_OUTPUT
+
+      - name: Setup Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          flutter-version: "${{ steps.fetch_config.outputs.flutter_version }}"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build Flutter Web App
+        run: |
+          DEFS=$(cat dart_defines.txt | xargs)
+          flutter build web --release $DEFS
+
+      - name: Compress build output
+        run: |
+          cd build/web
+          zip -r ../../build.zip .
+
+      - name: Upload to Dashhost
+        run: |
+          curl -X POST \
+            -F "deployment_tag=${{ steps.init_deploy.outputs.deployment_tag }}" \
+            -F "build=@build.zip" \
+            https://api.dashhost.app/v1/project/deploy/$APP_ID/$API_KEY/
