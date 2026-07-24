@@ -40,8 +40,8 @@ A clone app of [MyKampus Radio apps](https://play.google.com/store/apps/details?
 
 ## Technology
 
-- Flutter: `3.32.8`
-- Dart: `3.8.1`
+- Flutter: `^3.44.0`
+- Dart: `^3.12.0`
 
 ## Compiles
 
