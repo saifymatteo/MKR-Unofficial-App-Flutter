@@ -24,15 +24,10 @@ class DrawerNav extends StatelessWidget {
       child: ListView(
         children: [
           const DrawerHeader(
-            child: Image(
-              image: AssetImage('images/MKR-logo-long-blue.png'),
-            ),
+            child: Image(image: AssetImage('images/MKR-logo-long-blue.png')),
           ),
           ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.headphones,
-              color: kMKRColorMain,
-            ),
+            leading: FaIcon(FontAwesomeIcons.headphones, color: kMKRColorMain),
             title: const Text('Listen Now!'),
             onTap: () => Navigator.pushReplacementNamed(context, Screen.home),
           ),
@@ -42,28 +37,19 @@ class DrawerNav extends StatelessWidget {
             child: Text('Content Hangat!'),
           ),
           ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.earthAsia,
-              color: kMKRColorMain,
-            ),
+            leading: FaIcon(FontAwesomeIcons.earthAsia, color: kMKRColorMain),
             title: const Text('Laman Web'),
             onTap: () => _handleUrl('https://mykampusradio.com/'),
           ),
           ListTile(
-            leading: Icon(
-              Icons.mic,
-              color: kMKRColorMain,
-            ),
+            leading: Icon(Icons.mic, color: kMKRColorMain),
             title: const Text('Show Clip'),
             onTap: () => _handleUrl(
               'https://www.youtube.com/channel/UChVS7qvjXYiPuqYNtiAPOWw',
             ),
           ),
           ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.youtube,
-              color: kMKRColorMain,
-            ),
+            leading: FaIcon(FontAwesomeIcons.youtube, color: kMKRColorMain),
             title: const Text('MyKampus TV'),
             onTap: () => _handleUrl(
               'https://www.youtube.com/channel/UC0wQr4JFllCGu5lehj4gHGw',
@@ -75,18 +61,12 @@ class DrawerNav extends StatelessWidget {
             child: Text('Social Media'),
           ),
           ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.facebook,
-              color: kMKRColorMain,
-            ),
+            leading: FaIcon(FontAwesomeIcons.facebook, color: kMKRColorMain),
             title: const Text('Facebook'),
             onTap: () => _handleUrl('https://www.facebook.com/mykampusradio/'),
           ),
           ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.xTwitter,
-              color: kMKRColorMain,
-            ),
+            leading: FaIcon(FontAwesomeIcons.xTwitter, color: kMKRColorMain),
             title: const Text('X (Twitter)'),
             onTap: () => _handleUrl('https://twitter.com/mykampusradio'),
           ),
@@ -99,10 +79,7 @@ class DrawerNav extends StatelessWidget {
           //   onTap: () => _handleUrl('https://www.instagram.com/mykampus_radio'),
           // ),
           ListTile(
-            leading: FaIcon(
-              FontAwesomeIcons.tiktok,
-              color: kMKRColorMain,
-            ),
+            leading: FaIcon(FontAwesomeIcons.tiktok, color: kMKRColorMain),
             title: const Text('TikTok'),
             onTap: () => _handleUrl('https://www.tiktok.com/@mykampus_radio'),
           ),
@@ -112,10 +89,7 @@ class DrawerNav extends StatelessWidget {
             child: Text('Hubungi Kami'),
           ),
           ListTile(
-            leading: Icon(
-              Icons.email_rounded,
-              color: kMKRColorMain,
-            ),
+            leading: Icon(Icons.email_rounded, color: kMKRColorMain),
             title: const Text('Email'),
             onTap: () => _handleUrl(
               'mailto:mykampusradio@gmail.com?subject=Pertanyaan&body=##%20Dihantar%20dari%20aplikasi%20MKR%20##',
@@ -138,10 +112,7 @@ class DrawerNav extends StatelessWidget {
           //   onTap: () => _handleUrl('https://wa.me/60122970491'),
           // ),
           ListTile(
-            leading: Icon(
-              Icons.place,
-              color: kMKRColorMain,
-            ),
+            leading: Icon(Icons.place, color: kMKRColorMain),
             title: const Text('Lokasi'),
             onTap: () => _handleUrl('https://goo.gl/maps/cjK65Rr6t2nw7aJE7'),
           ),
@@ -151,10 +122,7 @@ class DrawerNav extends StatelessWidget {
             child: Text('Extra'),
           ),
           ListTile(
-            leading: Icon(
-              Icons.settings,
-              color: kMKRColorMain,
-            ),
+            leading: Icon(Icons.settings, color: kMKRColorMain),
             title: const Text('Settings'),
             onTap: () =>
                 Navigator.pushReplacementNamed(context, Screen.settingsScreen),

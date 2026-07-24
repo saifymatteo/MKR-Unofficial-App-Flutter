@@ -24,9 +24,7 @@ class MainScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(title),
-      ),
+      appBar: AppBar(title: Text(title)),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       floatingActionButton: StreamBuilder<PlaybackState>(
         stream: audioHandler.playbackState,
@@ -41,7 +39,7 @@ class MainScreen extends StatelessWidget {
             AudioProcessingState.ready => 'Audio: Ready',
             AudioProcessingState.idle => 'Audio: Idle',
             AudioProcessingState.buffering => 'Audio: Buffering',
-            _ => 'Audio: Error'
+            _ => 'Audio: Error',
           };
 
           return Padding(
@@ -75,10 +73,7 @@ class MainScreen extends StatelessWidget {
                 Text(
                   statusAudio,
                   textAlign: TextAlign.center,
-                  style: TextStyle(
-                    fontSize: 10,
-                    color: Colors.grey[400],
-                  ),
+                  style: TextStyle(fontSize: 10, color: Colors.grey[400]),
                 ),
               ],
             ),
@@ -91,10 +86,11 @@ class MainScreen extends StatelessWidget {
           return MaterialPageRoute(
             settings: settings,
             builder: switch (route) {
-              Screen.home => (context) =>
-                  ListenNowScreen(audioHandler: audioHandler),
+              Screen.home => (context) => ListenNowScreen(
+                audioHandler: audioHandler,
+              ),
               Screen.settingsScreen => (context) => SettingScreen(),
-              _ => (context) => const ErrorScreen()
+              _ => (context) => const ErrorScreen(),
             },
           );
         },

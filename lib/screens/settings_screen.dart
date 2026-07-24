@@ -31,7 +31,7 @@ class SettingScreen extends StatelessWidget {
                       AdaptiveThemeMode.light => false,
                       _ => false,
                     },
-                    activeColor: kMKRColorMain,
+                    activeThumbColor: kMKRColorMain,
                   ),
                 );
               },
